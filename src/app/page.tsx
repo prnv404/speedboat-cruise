@@ -85,52 +85,52 @@ export default function Home() {
                 highlights: "Nature Trails • Guided Tours • Small Groups"
               }
             ].map((service, index) => (
-              <div key={index} className={`card group transition-all duration-300 ${
+              <div key={index} className={`card relative ${
                 index === 0 
-                  ? 'md:col-span-2 lg:col-span-2 bg-gradient-to-br from-emerald-900/50 to-black border border-emerald-800/30 hover:border-emerald-600/50 hover:from-emerald-900/70 hover:to-black' 
+                  ? 'md:col-span-2 lg:col-span-2 bg-gradient-to-br from-emerald-900/50 to-black border border-emerald-800/30 hover:border-emerald-600/50' 
                   : 'hover:bg-emerald-950/50'
               }`}>
                 {index === 0 && (
-                  <div className="absolute top-0 right-0 bg-emerald-600 text-white text-xs px-3 py-1 rounded-bl-lg rounded-tr-lg font-medium">
-                    FEATURED
+                  <div className="absolute top-0 right-0 bg-emerald-600 text-white text-xs px-3 py-1 rounded-bl-lg font-medium">
+                    PREMIUM SERVICE
                   </div>
                 )}
                 <span className={`text-4xl mb-4 block ${index === 0 ? 'animate-pulse' : ''}`}>{service.icon}</span>
-                <h3 className={`text-xl font-semibold mb-2 ${index === 0 ? 'text-2xl text-emerald-400' : ''}`}>{service.title}</h3>
+                <h3 className={`${index === 0 ? 'text-2xl text-emerald-400' : 'text-xl'} font-semibold mb-2`}>{service.title}</h3>
                 <p className="text-white/70 mb-4">{service.description}</p>
                 {index === 0 ? (
-                  <div className="space-y-6 pt-4 border-t border-emerald-800/30">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
+                  <div className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="bg-black/30 p-4 rounded-lg">
                         <h4 className="text-emerald-400 text-sm font-medium mb-3 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
                           Popular Tours
                         </h4>
                         <ul className="space-y-3">
-                          {service.packages.map((pkg, i) => (
-                            <li key={i} className="text-sm text-white/80 flex items-center gap-2 group/item">
-                              <span className="transform group-hover/item:scale-110 transition-transform">🚤</span>
-                              <span className="group-hover/item:text-emerald-400 transition-colors">{pkg}</span>
+                          {service.packages!.map((pkg, i) => (
+                            <li key={i} className="text-sm text-white/80 flex items-center gap-2">
+                              <span>🚤</span>
+                              <span>{pkg}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="bg-black/30 p-4 rounded-lg backdrop-blur-sm">
+                      <div className="bg-black/30 p-4 rounded-lg">
                         <h4 className="text-emerald-400 text-sm font-medium mb-3 flex items-center gap-2">
                           <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
                           Features
                         </h4>
                         <ul className="space-y-3">
-                          {service.features.map((feature, i) => (
-                            <li key={i} className="text-sm text-white/80 flex items-center gap-2 group/item">
-                              <span className="transform group-hover/item:scale-110 transition-transform">📌</span>
-                              <span className="group-hover/item:text-emerald-400 transition-colors">{feature}</span>
+                          {service.features!.map((feature, i) => (
+                            <li key={i} className="text-sm text-white/80 flex items-center gap-2">
+                              <span>📌</span>
+                              <span>{feature}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
-                    <div className="bg-emerald-900/20 rounded-lg p-3 border border-emerald-800/30">
+                    <div className="bg-emerald-900/20 rounded-lg p-3">
                       <p className="text-sm text-emerald-300/90 italic flex items-center gap-2">
                         <span>🌅</span>
                         Daily sunrise, sunset and flexible time rides available
@@ -138,21 +138,22 @@ export default function Home() {
                     </div>
                     <div className="pt-2">
                       <a href="#contact" 
-                         className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-all group/button">
+                         className="block w-full bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 px-6 rounded-lg transition-colors">
                         Book Your Adventure
-                        <span className="transform group-hover/button:translate-x-1 transition-transform">→</span>
                       </a>
                     </div>
                   </div>
                 ) : (
-                  <div className="space-y-2 pt-4 border-t border-white/10">
-                    <p className="text-sm text-white/60 flex items-center gap-2">
-                      <span>⏱️</span> {service.duration}
-                    </p>
-                    <p className="text-sm text-emerald-400 flex items-center gap-2">
-                      <span>✨</span> {service.highlights}
-                    </p>
-                    <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div>
+                    <div className="pt-4 border-t border-white/10">
+                      <p className="text-sm text-white/60 flex items-center gap-2">
+                        <span>⏱️</span> {service.duration}
+                      </p>
+                      <p className="text-sm text-emerald-400 flex items-center gap-2 mt-2">
+                        <span>✨</span> {service.highlights}
+                      </p>
+                    </div>
+                    <div className="mt-4">
                       <a href="#contact" className="text-emerald-400 text-sm hover:text-emerald-300 transition-colors inline-flex items-center gap-2">
                         Book Now <span>→</span>
                       </a>
