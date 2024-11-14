@@ -51,14 +51,14 @@ export default function Home() {
                 title: "Speed Boat Tours",
                 description: "Experience the thrill of speed combined with scenic beauty. Perfect for quick tours and photography enthusiasts.",
                 duration: "1-2 Hours",
-                price: "Starting from ₹2000"
+                price: "Starting from ₹300"
               },
               {
                 icon: "🚣",
                 title: "Shikara Boating",
                 description: "Traditional boat rides offering a peaceful journey through narrow canals and village life.",
                 duration: "2-3 Hours",
-                price: "Starting from ₹1500"
+                price: "Starting from ₹999"
               },
               {
                 icon: "🏠",
@@ -72,7 +72,7 @@ export default function Home() {
                 title: "Kayaking",
                 description: "Get up close with nature in our eco-friendly kayaks. Perfect for adventure seekers and nature lovers.",
                 duration: "2-3 Hours",
-                price: "Starting from ₹1000"
+                price: "Starting from ₹399"
               }
             ].map((service, index) => (
               <div key={index} className="card group hover:bg-emerald-950/50 transition-colors">
