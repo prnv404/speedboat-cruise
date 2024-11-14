@@ -51,28 +51,28 @@ export default function Home() {
                 title: "Speed Boat Tours",
                 description: "Experience the thrill of speed combined with scenic beauty. Perfect for quick tours and photography enthusiasts.",
                 duration: "1-2 Hours",
-                price: "Starting from ₹300"
+                highlights: "Scenic Routes • Photography Spots • Safety Equipment"
               },
               {
                 icon: "🚣",
                 title: "Shikara Boating",
                 description: "Traditional boat rides offering a peaceful journey through narrow canals and village life.",
                 duration: "2-3 Hours",
-                price: "Starting from ₹999"
+                highlights: "Village Life • Bird Watching • Sunset Views"
               },
               {
                 icon: "🏠",
                 title: "House Boat Cruise",
                 description: "Luxury floating homes with premium amenities. Ideal for overnight stays and complete backwater experience.",
                 duration: "12-24 Hours",
-                price: "Starting from ₹8000"
+                highlights: "AC Rooms • Fresh Meals • Premium Amenities"
               },
               {
                 icon: "🛶",
                 title: "Kayaking",
                 description: "Get up close with nature in our eco-friendly kayaks. Perfect for adventure seekers and nature lovers.",
                 duration: "2-3 Hours",
-                price: "Starting from ₹399"
+                highlights: "Nature Trails • Fitness Activity • Expert Guide"
               }
             ].map((service, index) => (
               <div key={index} className="card group hover:bg-emerald-950/50 transition-colors">
@@ -84,7 +84,7 @@ export default function Home() {
                     <span>⏱️</span> {service.duration}
                   </p>
                   <p className="text-sm text-emerald-400 flex items-center gap-2">
-                    <span>💰</span> {service.price}
+                    <span>✨</span> {service.highlights}
                   </p>
                 </div>
                 <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity">
