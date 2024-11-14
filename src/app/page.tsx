@@ -117,10 +117,10 @@ export default function Home() {
               Book your exclusive backwater adventure today
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+919947753191" className="primary-button inline-flex items-center justify-center gap-2">
+              <a href="tel:+919947753154" className="primary-button inline-flex items-center justify-center gap-2">
                 <span>📞</span> Call Now
               </a>
-              <a href="https://wa.me/919947753191" className="secondary-button inline-flex items-center justify-center gap-2">
+              <a href="https://wa.me/919947753154" className="secondary-button inline-flex items-center justify-center gap-2">
                 <span>💬</span> WhatsApp
               </a>
             </div>
@@ -151,7 +151,7 @@ export default function Home() {
                   <p>Alleppey, Kerala</p>
                   <p>India</p>
                   <p className="flex items-center gap-2">
-                    <span>📞</span> +91 9947753191
+                    <span>📞</span> +91 9947753154
                   </p>
                   <p className="flex items-center gap-2">
                     <span>📧</span> abhijithabcd74@gmail.com
