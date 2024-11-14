@@ -29,6 +29,7 @@ export default function Navbar() {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
+            <a href="#services" className="nav-link">Services</a>
             <a href="#about" className="nav-link">About</a>
             <a href="#gallery" className="nav-link">Gallery</a>
             <a href="#contact" className="nav-link">Contact</a>

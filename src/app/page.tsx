@@ -34,6 +34,70 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Services Section */}
+      <section id="services" className="py-24 section-gradient">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <span className="text-emerald-400 text-sm tracking-wider uppercase font-medium">Our Services</span>
+            <h2 className="section-title mt-2">Explore Our Adventures</h2>
+            <p className="text-xl text-white/80 max-w-3xl mx-auto">
+              Discover the diverse ways to experience Alleppey&apos;s enchanting backwaters
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: "⚡",
+                title: "Speed Boat Tours",
+                description: "Experience the thrill of speed combined with scenic beauty. Perfect for quick tours and photography enthusiasts.",
+                duration: "1-2 Hours",
+                price: "Starting from ₹2000"
+              },
+              {
+                icon: "🚣",
+                title: "Shikara Boating",
+                description: "Traditional boat rides offering a peaceful journey through narrow canals and village life.",
+                duration: "2-3 Hours",
+                price: "Starting from ₹1500"
+              },
+              {
+                icon: "🏠",
+                title: "House Boat Cruise",
+                description: "Luxury floating homes with premium amenities. Ideal for overnight stays and complete backwater experience.",
+                duration: "12-24 Hours",
+                price: "Starting from ₹8000"
+              },
+              {
+                icon: "🛶",
+                title: "Kayaking",
+                description: "Get up close with nature in our eco-friendly kayaks. Perfect for adventure seekers and nature lovers.",
+                duration: "2-3 Hours",
+                price: "Starting from ₹1000"
+              }
+            ].map((service, index) => (
+              <div key={index} className="card group hover:bg-emerald-950/50 transition-colors">
+                <span className="text-4xl mb-4 block">{service.icon}</span>
+                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                <p className="text-white/70 mb-4">{service.description}</p>
+                <div className="space-y-2 pt-4 border-t border-white/10">
+                  <p className="text-sm text-white/60 flex items-center gap-2">
+                    <span>⏱️</span> {service.duration}
+                  </p>
+                  <p className="text-sm text-emerald-400 flex items-center gap-2">
+                    <span>💰</span> {service.price}
+                  </p>
+                </div>
+                <div className="mt-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <a href="#contact" className="text-emerald-400 text-sm hover:text-emerald-300 transition-colors inline-flex items-center gap-2">
+                    Book Now <span>→</span>
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* About Section */}
       <section id="about" className="py-24 section-gradient">
         <div className="container mx-auto px-4">
