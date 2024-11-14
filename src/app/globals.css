@@ -2,20 +2,117 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --primary: #047857;
+    --secondary: #0d9488;
+    --accent: #f59e0b;
+  }
+
+  body {
+    @apply bg-black text-gray-100 antialiased overflow-x-hidden;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .hero-gradient {
+    @apply bg-gradient-to-r from-black/70 via-black/60 to-black/70;
+  }
+
+  .section-gradient {
+    @apply bg-gradient-to-b from-black to-gray-900/50;
+  }
+
+  .navbar {
+    @apply fixed w-full z-50 transition-all duration-300;
+  }
+
+  .navbar-scrolled {
+    @apply bg-black/90 backdrop-blur-md shadow-lg;
+  }
+
+  .nav-link {
+    @apply text-white/90 hover:text-white transition-colors relative text-sm uppercase tracking-wider font-medium;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .primary-button {
+    @apply bg-gradient-to-r from-emerald-600 to-emerald-500 text-white px-8 py-3 rounded-lg font-semibold 
+    transform transition-all hover:scale-105 hover:shadow-lg hover:shadow-emerald-500/30 active:scale-95
+    uppercase tracking-wider text-sm;
+  }
+
+  .secondary-button {
+    @apply bg-white/10 backdrop-blur-sm text-white border border-white/20 px-8 py-3 rounded-lg font-semibold 
+    transform transition-all hover:bg-white/20 hover:scale-105 active:scale-95
+    uppercase tracking-wider text-sm;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold mb-6 text-white;
+  }
+
+  .card {
+    @apply bg-gray-900/50 backdrop-blur-sm rounded-2xl shadow-xl p-6 transform transition-all hover:-translate-y-2 hover:shadow-2xl
+    border border-gray-800/50 text-white;
+  }
+
+  .footer-gradient {
+    @apply bg-gradient-to-b from-black to-gray-900;
+  }
+
+  .contact-gradient {
+    @apply bg-gradient-to-b from-black/95 to-black;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.8s ease-out forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
