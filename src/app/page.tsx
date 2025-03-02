@@ -6,7 +6,6 @@ export default function Home() {
 
   return (
     <main className="relative">
-      
       <Navbar />
 
       {/* Hero Section */}
@@ -66,7 +65,6 @@ export default function Home() {
                   "1 hour 30 mnt tour Alleppey to pathiramanal island",
                   "30 Minutes village tour",
                   "10 minutes local ride",
-                  "30 Minutes Village Tour",
                 ],
                 features: [
                   " Daily sunrise, sunset and flexible time Rides",
@@ -91,7 +89,6 @@ export default function Home() {
                   "Pathiramanal Island is a tranquil paradise on Vembanad Lake, perfect for nature walks, birdwatching, and scenic backwater views.",
                 features: [
                   "Lush greenery and rich birdlife, including rare species like darters and Indian shags",
-                  "Short boat ride from Alleppey",
                   "Peaceful nature walks and scenic views",
                   "Refreshing ambiance ideal for nature lovers and explorers",
                 ],
@@ -285,12 +282,14 @@ export default function Home() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              "/IMG20240917105505.jpg",
               "/IMG20240921073607.jpg",
-              "/IMG20241004122933.jpg",
               "/IMG20241102174131.jpg",
               "/IMG-20241008-WA0022.jpg",
-              "/IMG-20241025-WA0008.jpg",
+              "/WhatsApp Image 2025-02-21 at 22.53.25_0ef67721.jpg",
+              "/WhatsApp Image 2025-02-21 at 22.53.26_5048d469.jpg",
+              "/WhatsApp Image 2025-02-21 at 22.53.27_7a9c8a3d.jpg",
+              "/WhatsApp Image 2025-02-21 at 22.53.29_e0dbfc7b.jpg",
+              "/WhatsApp Image 2025-02-21 at 22.53.30_c2e2d065.jpg",
             ].map((src, index) => (
               <div
                 key={index}
