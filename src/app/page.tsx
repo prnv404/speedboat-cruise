@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import { features } from "process";
+// import { features } from "process";
 
 export default function Home() {
 
