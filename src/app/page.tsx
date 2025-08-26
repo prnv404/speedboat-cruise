@@ -5,27 +5,22 @@ import fs from "fs";
 import path from "path";
 
 export default function Home() {
-  const heroImages = [
-    "/IMG20240921073607.jpg",
-    "/IMG20240917105505.jpg",
-    "/IMG-20241008-WA0022.jpg",
-    "/IMG20241001093324.jpg",
-  ];
-
-  // Build gallery images from public/ at render time (server component)
+  // Discover all images from public/ at render time (server component)
   const publicDir = path.join(process.cwd(), "public");
   const allowedExt = new Set([".jpg", ".jpeg", ".png", ".webp"]);
-  let galleryImages: string[] = [];
+  let allImages: string[] = [];
   try {
     const files = fs.readdirSync(publicDir);
-    galleryImages = files
+    allImages = files
       .filter((f) => allowedExt.has(path.extname(f).toLowerCase()))
       .sort()
       .map((f) => `/${f}`);
   } catch (e) {
-    // Fallback to a minimal set if reading fails
-    galleryImages = heroImages;
+    allImages = [];
   }
+
+  const heroImages = allImages;
+  const galleryImages = allImages;
   return (
     <main className="relative">
       <Navbar />
