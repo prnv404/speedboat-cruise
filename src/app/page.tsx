@@ -1,9 +1,31 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-// import { features } from "process";
+import BackgroundCarousel from "@/components/BackgroundCarousel";
+import fs from "fs";
+import path from "path";
 
 export default function Home() {
+  const heroImages = [
+    "/IMG20240921073607.jpg",
+    "/IMG20240917105505.jpg",
+    "/IMG-20241008-WA0022.jpg",
+    "/IMG20241001093324.jpg",
+  ];
 
+  // Build gallery images from public/ at render time (server component)
+  const publicDir = path.join(process.cwd(), "public");
+  const allowedExt = new Set([".jpg", ".jpeg", ".png", ".webp"]);
+  let galleryImages: string[] = [];
+  try {
+    const files = fs.readdirSync(publicDir);
+    galleryImages = files
+      .filter((f) => allowedExt.has(path.extname(f).toLowerCase()))
+      .sort()
+      .map((f) => `/${f}`);
+  } catch (e) {
+    // Fallback to a minimal set if reading fails
+    galleryImages = heroImages;
+  }
   return (
     <main className="relative">
       <Navbar />
@@ -11,215 +33,111 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center">
         <div className="absolute inset-0">
-          <Image
-            src="/IMG20241001093324.jpg"
-            alt="Punnamada Backwaters"
-            fill
-            className="object-cover"
-            priority
-          />
+          <BackgroundCarousel images={heroImages} />
           <div className="absolute inset-0 hero-gradient" />
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl space-y-6 animate-fade-in">
-            <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
-              Luxury Backwater Adventures
+          <div className="max-w-4xl space-y-6 animate-fade-in">
+            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+            Explore the Alleppey's backwater with our speed boat cruise
             </h1>
-            <p className="text-xl text-white/90">
-              Experience the serenity of Alappuzha&apos;s pristine waters in
-              unmatched comfort and style
+            <p className="text-lg md:text-xl text-white/90 max-w-3xl">
+              Experience premium green tourism in Alappuzha&apos;s serene backwaters. Fast, safe, and unforgettable.
+            </p>
+            <p className="text-emerald-300/90 italic text-sm md:text-base">
+              ɴᴏ ʙɪɢ ᴅᴇᴀʟ ɪᴛꜱ ᴊᴜꜱᴛ ᴀʟʟᴇᴩᴩᴇʏ — ᴊᴜꜱᴛ ride ᴡɪᴛʜ ᴜꜱ
             </p>
             <div className="flex gap-4 pt-4">
-              <a href="#contact" className="primary-button">
-                Start Your Journey
-              </a>
-              <a href="#gallery" className="secondary-button">
-                Gallery
-              </a>
+              <a href="#contact" className="primary-button">Book Now</a>
+              <a href="#packages" className="secondary-button">View Packages</a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-24 section-gradient">
+      {/* Packages Section */}
+      <section id="packages" className="py-24 section-gradient">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <span className="text-emerald-400 text-sm tracking-wider uppercase font-medium">
-              Our Services
+              Our Packages
             </span>
-            <h2 className="section-title mt-2">Explore Our Adventures</h2>
+            <h2 className="section-title mt-2">Choose Your Backwater Ride</h2>
             <p className="text-xl text-white/80 max-w-3xl mx-auto">
-              Discover the diverse ways to experience Alleppey&apos;s enchanting
-              backwaters
+              Curated experiences designed for comfort, safety and scenic delight
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                icon: "⚡",
-                title: "Premium Speed Boat Tours",
-                description:
-                  "Experience the thrill of high-speed backwater adventures with our premium speedboat services. Featuring flexible timings for sunrise and sunset rides.",
-                packages: [
-                  "1 hour 30 mnt tour Alleppey to pathiramanal island",
-                  "30 Minutes village tour",
-                  "10 minutes local ride",
-                ],
-                features: [
-                  " Daily sunrise, sunset and flexible time Rides",
-
-                  " Every package have a expert and experienced driver along with you.",
-
-                  " Rides of 10 minutes or less will be charged per person.",
-
-                  "You can rent a speedboat for a full day or as long as you like",
-
-                  "Average Speed 60 km/h (35 knots)",
-
-                  " Speed Boat Maximum capacity 7 people ",
-
-                  "We are all about the fun and the speed but safety is our number one priority",
-                ],
+                title: "1 Hour Alleppey Village Tour",
+                badge: "Signature",
+                route:
+                  "Starts from Alleppey (2km from town) → Boat race track → Village canals → Kayinakary terminal (photo point) → Coconut groves → Vembanad lake → Backwater beauty spots",
+                distance: "Total distance: 30 km",
               },
               {
-                icon: "🏝️",
-                title: "Pathiramanal Island",
-                description:
-                  "Pathiramanal Island is a tranquil paradise on Vembanad Lake, perfect for nature walks, birdwatching, and scenic backwater views.",
-                features: [
-                  "Lush greenery and rich birdlife, including rare species like darters and Indian shags",
-                  "Peaceful nature walks and scenic views",
-                  "Refreshing ambiance ideal for nature lovers and explorers",
-                ],
-                packages: [
-                  "20 km boat journey from Alleppey to Pathiramanal Island",
-                  "Approx. 30 minutes travel time one way",
-                  "30 minutes to explore the island's beauty",
-                  "Total tour duration: 1 hour 30 minutes",
-                ],
+                title: "30 Minutes Village Tour",
+                badge: "Popular",
+                route:
+                  "Starts from Alleppey → Boat race track → Village canal → Vembanad lake → Punnamada lake",
+                distance: "Total distance: 15 km",
               },
               {
-                icon: "🚣",
-                title: "Shikara Boating",
-                description:
-                  "Traditional boat rides through narrow canals and village life.",
-                duration: "2-3 Hours",
-                highlights:
-                  "Village Life • Peaceful Journey • Local Experience",
+                title: "10 Minutes Fun Ride",
+                badge: "Quick Ride",
+                route: "Punnamada lake — 7 km fun ride",
+                distance: "Quick local experience",
               },
-              {
-                icon: "🛶",
-                title: "Kayaking",
-                description:
-                  "Get up close with nature in our eco-friendly kayaks.",
-                duration: "2-3 Hours",
-                highlights: "Nature Trails • Guided Tours • Small Groups",
-              },
-            ].map((service, index) => (
-              <div
-                key={index}
-                className={`card relative ${
-                  index === 0
-                    ? "md:col-span-2 lg:col-span-2 bg-gradient-to-br from-emerald-900/50 to-black border border-emerald-800/30 hover:border-emerald-600/50"
-                    : "hover:bg-emerald-950/50"
-                }`}
-              >
-                {index === 0 && (
-                  <div className="absolute top-0 right-0 bg-emerald-600 text-white text-xs px-3 py-1 rounded-bl-lg font-medium">
-                    PREMIUM SERVICE
-                  </div>
-                )}
-                <span
-                  className={`text-4xl mb-4 block ${
-                    index === 0 ? "animate-pulse" : ""
-                  }`}
-                >
-                  {service.icon}
-                </span>
-                <h3
-                  className={`${
-                    index === 0 ? "text-2xl text-emerald-400" : "text-xl"
-                  } font-semibold mb-2`}
-                >
-                  {service.title}
-                </h3>
-                <p className="text-white/70 mb-4">{service.description}</p>
-                {index === 0 || index === 1 ? (
-                  <div className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div className="bg-black/30 p-4 rounded-lg">
-                        <h4 className="text-emerald-400 text-sm font-medium mb-3 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
-                          Popular Tours
-                        </h4>
-                        <ul className="space-y-3">
-                          {service.packages!.map((pkg, i) => (
-                            <li
-                              key={i}
-                              className="text-sm text-white/80 flex items-center gap-2"
-                            >
-                              <span>🚤</span>
-                              <span>{pkg}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div className="bg-black/30 p-4 rounded-lg">
-                        <h4 className="text-emerald-400 text-sm font-medium mb-3 flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full"></span>
-                          Features
-                        </h4>
-                        <ul className="space-y-3">
-                          {service.features!.map((feature, i) => (
-                            <li
-                              key={i}
-                              className="text-sm text-white/80 flex items-center gap-2"
-                            >
-                              <span>📌</span>
-                              <span>{feature}</span>
-                            </li>
-                          ))}
-                        </ul>
+            ].map((pkg, i) => (
+              <div key={i} className="relative group rounded-2xl overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/15 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                <div className="relative p-[1px] rounded-2xl bg-gradient-to-b from-white/20 via-white/10 to-white/5">
+                  <div className="rounded-2xl bg-black/40 backdrop-blur-md p-6 h-full">
+                    <div className="flex items-start justify-between gap-4 mb-4">
+                      <div>
+                        <div className="inline-flex items-center gap-2 mb-2">
+                          <span className="px-2 py-0.5 text-xs rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-400/20">
+                            {pkg.badge}
+                          </span>
+                        </div>
+                        <h3 className="text-xl font-semibold text-white leading-snug">{pkg.title}</h3>
                       </div>
                     </div>
-                    <div className="bg-emerald-900/20 rounded-lg p-3">
-                      <p className="text-sm text-emerald-300/90 italic flex items-center gap-2">
-                        <span>🌅</span>
-                        Daily sunrise, sunset and flexible time rides available
+                    <p className="text-white/80 text-sm leading-relaxed mb-5">
+                      {pkg.route}
+                    </p>
+                    <div className="flex items-center justify-between text-sm">
+                      <p className="text-white/70 inline-flex items-center gap-2">
+                        <span>🧭</span> {pkg.distance}
                       </p>
-                    </div>
-                    <div className="pt-2">
-                      <a
-                        href="#contact"
-                        className="block w-full bg-emerald-600 hover:bg-emerald-500 text-white text-center py-3 px-6 rounded-lg transition-colors"
-                      >
-                        Book Your Adventure
-                      </a>
+                      <a href="#contact" className="secondary-button">Book →</a>
                     </div>
                   </div>
-                ) : (
-                  <div>
-                    <div className="pt-4 border-t border-white/10">
-                      <p className="text-sm text-white/60 flex items-center gap-2">
-                        <span>⏱️</span> {service.duration}
-                      </p>
-                      <p className="text-sm text-emerald-400 flex items-center gap-2 mt-2">
-                        <span>✨</span> {service.highlights}
-                      </p>
-                    </div>
-                    <div className="mt-4">
-                      <a
-                        href="#contact"
-                        className="text-emerald-400 text-sm hover:text-emerald-300 transition-colors inline-flex items-center gap-2"
-                      >
-                        Book Now <span>→</span>
-                      </a>
-                    </div>
-                  </div>
-                )}
+                </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Feature Band */}
+      <section className="py-12">
+        <div className="container mx-auto px-4">
+          <div className="grid sm:grid-cols-3 gap-4">
+            <div className="card">
+              <p className="text-sm text-white/70">Average Speed</p>
+              <p className="text-2xl font-bold text-emerald-400">60 km/h</p>
+              <p className="text-xs text-white/60">(35 knots)</p>
+            </div>
+            <div className="card">
+              <p className="text-sm text-white/70">Maximum Capacity</p>
+              <p className="text-2xl font-bold text-emerald-400">7 people</p>
+            </div>
+            <div className="card">
+              <p className="text-sm text-white/70">Safety First</p>
+              <p className="text-sm text-white/80">Experienced driver & life jackets provided</p>
+            </div>
           </div>
         </div>
       </section>
@@ -281,16 +199,7 @@ export default function Home() {
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              "/IMG20240921073607.jpg",
-              "/IMG20241102174131.jpg",
-              "/IMG-20241008-WA0022.jpg",
-              "/WhatsApp Image 2025-02-21 at 22.53.25_0ef67721.jpg",
-              "/WhatsApp Image 2025-02-21 at 22.53.26_5048d469.jpg",
-              "/WhatsApp Image 2025-02-21 at 22.53.27_7a9c8a3d.jpg",
-              "/WhatsApp Image 2025-02-21 at 22.53.29_e0dbfc7b.jpg",
-              "/WhatsApp Image 2025-02-21 at 22.53.30_c2e2d065.jpg",
-            ].map((src, index) => (
+            {galleryImages.map((src, index) => (
               <div
                 key={index}
                 className="group relative aspect-video overflow-hidden rounded-xl"
@@ -317,9 +226,7 @@ export default function Home() {
             <span className="text-emerald-400 text-sm tracking-wider uppercase font-medium">
               Ready to Begin?
             </span>
-            <h2 className="section-title mt-2">
-              Start Your Premium Experience
-            </h2>
+            <h2 className="section-title mt-2">Start Your Premium Experience</h2>
             <p className="text-xl mb-8 text-white/80">
               Book your exclusive backwater adventure today
             </p>
@@ -328,7 +235,13 @@ export default function Home() {
                 href="tel:+919947753154"
                 className="primary-button inline-flex items-center justify-center gap-2"
               >
-                <span>📞</span> Call Now
+                <span>📞</span> 9947753154
+              </a>
+              <a
+                href="tel:+919496736753"
+                className="secondary-button inline-flex items-center justify-center gap-2"
+              >
+                <span>📞</span> 9496736753
               </a>
               <a
                 href="https://wa.me/919947753154"
@@ -372,7 +285,7 @@ export default function Home() {
                   <p>Alleppey, Kerala</p>
                   <p>India</p>
                   <p className="flex items-center gap-2">
-                    <span>📞</span> +91 9947753154
+                    <span>📞</span> +91 9947753154 / +91 9496736753
                   </p>
                   <p className="flex items-center gap-2">
                     <span>📧</span> abhijithabcd74@gmail.com
@@ -386,7 +299,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-2">
                   {[
                     "About",
-                    "Experiences",
+                    "Packages",
                     "Gallery",
                     "Contact",
                     "Book Now",
@@ -405,7 +318,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-white/10 mt-12 pt-8 text-center text-white/50">
-            <p> 2024 Speed Boat Cruise Alleppey. All rights reserved.</p>
+            <p> 2025 Speed Boat Cruise Alleppey. All rights reserved.</p>
           </div>
         </div>
       </footer>
