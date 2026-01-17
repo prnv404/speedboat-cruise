@@ -24,7 +24,7 @@
   }
 
   .navbar {
-    @apply fixed w-full z-50 transition-all duration-300 border-b border-transparent;
+    @apply fixed w-full z-50 transition-all duration-300 border-b border-transparent bg-transparent;
   }
 
   .navbar-scrolled {

@@ -9,9 +9,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Speed Boat Cruise Alleppey | Luxury Backwater Tours",
+  title: "Speed Boat Cruise Alleppey | #1 Private Backwater Boat cruise",
   description:
-    "Experience the thrill of Alappuzha's backwaters with our premium speedboat tours. Discover scenic routes and create unforgettable memories.",
+    "Looking for the best boat ride in Alleppey? Experience our private speed boat tours with thrilling speed and sightseeing through  village canals. Book your ride today!.",
 };
 
 export default function RootLayout({
