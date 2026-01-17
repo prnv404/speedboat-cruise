@@ -1,7 +1,7 @@
 "use client";
 
 import MuxPlayer from "@mux/mux-player-react";
-import { CSSProperties } from "react";
+import { CSSProperties, useEffect, useRef } from "react";
 
 export const videoData = [
     {
@@ -88,6 +88,8 @@ export default function Video({
     onEnded,
     onError,
 }: VideoProps) {
+    const playerRef = useRef<any>(null);
+
     // Determine aspect ratio based on orientation
     const getAspectRatio = () => {
         if (aspectRatio) return aspectRatio;
@@ -104,6 +106,29 @@ export default function Video({
         }
     };
 
+    useEffect(() => {
+        const el = playerRef.current;
+        if (!el) return;
+
+        if (autoplay) {
+            // Ensure element is ready and handle play
+            const attemptPlay = () => {
+                const p = el.play();
+                if (p && typeof p.catch === 'function') {
+                    p.catch((e: any) => {
+                        // console.warn("Autoplay prevented:", e.message);
+                        // If it failed but we want to autoplay, maybe try muting if not already?
+                    });
+                }
+            };
+
+            const timer = setTimeout(attemptPlay, 200);
+            return () => clearTimeout(timer);
+        } else {
+            el.pause();
+        }
+    }, [autoplay, playbackId]);
+
     // Container styles for responsive video
     const containerStyle: CSSProperties = {
         position: "relative",
@@ -111,16 +136,19 @@ export default function Video({
         aspectRatio: getAspectRatio(),
         overflow: "hidden",
         borderRadius: rounded ? "1rem" : "0",
+        // @ts-ignore
+        "--media-loading-icon-display": showLoadingSpinner ? "block" : "none",
         ...style,
     };
 
     return (
         <div style={containerStyle} className={className}>
             <MuxPlayer
+                ref={playerRef}
                 playbackId={playbackId}
                 metadata={metadata}
                 streamType="on-demand"
-                autoPlay={autoplay ? "muted" : false}
+                // autoPlay is handled manually via ref for precise control in carousels
                 muted={muted}
                 loop={loop}
                 preload={preload}

@@ -12,6 +12,9 @@ export const metadata: Metadata = {
   title: "Speed Boat Cruise Alleppey | #1 Private Backwater Boat cruise",
   description:
     "Looking for the best boat ride in Alleppey? Experience our private speed boat tours with thrilling speed and sightseeing through  village canals. Book your ride today!.",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default function RootLayout({

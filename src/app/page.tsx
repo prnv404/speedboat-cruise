@@ -33,13 +33,8 @@ export default function Home() {
           <div className="absolute inset-0 hero-gradient pointer-events-none" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 py-24 sm:py-32">
-          <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8 animate-fade-in">
-            {/* <div className="inline-block animate-slide-up" style={{ animationDelay: '0.1s' }}>
-              <span className="px-3 sm:px-4 py-1 sm:py-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs sm:text-sm font-medium tracking-wider sm:tracking-widest uppercase backdrop-blur-sm">
-                Premium Backwater Experience
-              </span>
-            </div> */}
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 py-24 sm:py-32 pointer-events-none">
+          <div className="max-w-4xl mx-auto text-center space-y-6 sm:space-y-8 animate-fade-in pointer-events-auto">
 
             <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight animate-slide-up px-4" style={{ animationDelay: '0.2s' }}>
               Speed Boat Cruise | Best <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Alleppey's </span>

@@ -49,17 +49,18 @@ export default function BackgroundCarousel({
           {videos.map((video, i) => (
             <div
               key={video.playbackId + i}
-              className={`absolute inset-0 transition-opacity duration-1000 ${i === index ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+              className={`absolute inset-0 transition-opacity duration-1000 pointer-events-none ${i === index ? "opacity-100 z-10" : "opacity-0 z-0"}`}
             >
               <Video
                 playbackId={video.playbackId}
                 metadata={video.metadata}
                 orientation="landscape"
-                autoplay={true}
+                autoplay={i === index}
                 muted={isMuted}
                 loop={true}
                 controls={false}
-                preload={i === 0 ? "auto" : "metadata"}
+                showLoadingSpinner={false}
+                preload={i === index || i === (index + 1) % itemsLength ? "auto" : "metadata"}
                 // @ts-ignore - MuxPlayer passed props
                 playsInline={true}
                 style={{
@@ -75,7 +76,7 @@ export default function BackgroundCarousel({
           ))}
 
           {/* Mute Toggle Button */}
-          <div className="absolute bottom-36 right-8 z-30 animate-fade-in">
+          <div className="absolute bottom-24 md:bottom-36 right-8 z-30 animate-fade-in pointer-events-auto">
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="p-3 rounded-full bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/20 transition-all hover:scale-105 hover:border-emerald-500/50 group"

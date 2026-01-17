@@ -6,7 +6,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="absolute top-0 left-0 w-full z-50 bg-transparent transition-all duration-300">
+    <nav className="absolute top-0 left-0 w-full z-50 border-b border-white/10 bg-black backdrop-blur-[2px]">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
@@ -58,7 +58,7 @@ export default function Navbar() {
           <a href="#about" className="text-lg text-white/90 hover:text-emerald-400 py-2 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>About</a>
           <a href="#gallery" className="text-lg text-white/90 hover:text-emerald-400 py-2 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Gallery</a>
           <a href="#contact" className="text-lg text-white/90 hover:text-emerald-400 py-2 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Contact</a>
-          <a href="#contact" className="primary-button text-center mt-2" onClick={() => setMobileMenuOpen(false)}>Book Now</a>
+          <a href="#contact" className="primary-button text-center mt-2 py-3" onClick={() => setMobileMenuOpen(false)}>Book Now</a>
         </div>
       </div>
     </nav>
