@@ -146,7 +146,7 @@ export default function Home() {
               },
               {
                 title: "Quick Thrill",
-                time: "15 Minutes",
+                time: "10 Minutes",
                 badge: "Express",
                 features: ["Punnamada Lake", "Speed Experience", "Photo Opportunities"],
                 distance: "7 km fun ride",
