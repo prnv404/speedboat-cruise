@@ -1,33 +1,24 @@
 "use client";
 
-import MuxPlayer from "@mux/mux-player-react";
-import { CSSProperties, useEffect, useRef } from "react";
+import { CSSProperties, useEffect, useRef, useMemo } from "react";
 
 export const videoData = [
     {
-        playbackId: "Y0000FTikCwPYWEUdewbajK3ASDtdKe4ZVrofCMciYyUk",
+        playbackId: "QMtKKstNfYU",
         metadata: {
-            video_id: "video-id-54321",
-            video_title: "Test video title",
+            video_id: "video-id-youtube-1",
+            video_title: "YouTube Short",
             viewer_user_id: "user-id-007",
         },
     },
     {
-        playbackId: "1ium1ikHVgtRewvcFh00C1xPbI29vtK3Lv006FiXXsb7U",
+        playbackId: "__7UCsbyZWE",
         metadata: {
-            video_id: "video-id-54321",
-            video_title: "Test video title",
+            video_id: "video-id-youtube-2",
+            video_title: "YouTube Short 2",
             viewer_user_id: "user-id-007",
         },
     }
-    // {
-    //     playbackId: "01Ol7VP8yZSfRjX02QJR188KRY1YE1ZQaxCDu5u43EdD4",
-    //     metadata: {
-    //         video_id: "video-id-54321",
-    //         video_title: "Test video title",
-    //         viewer_user_id: "user-id-007",
-    //     },
-    // },
 ];
 
 export interface VideoProps {
@@ -88,7 +79,7 @@ export default function Video({
     onEnded,
     onError,
 }: VideoProps) {
-    const playerRef = useRef<any>(null);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
     // Determine aspect ratio based on orientation
     const getAspectRatio = () => {
@@ -106,28 +97,37 @@ export default function Video({
         }
     };
 
+    // Handle Mute/Unmute without reload
     useEffect(() => {
-        const el = playerRef.current;
-        if (!el) return;
+        const iframe = iframeRef.current;
+        if (!iframe?.contentWindow) return;
 
-        if (autoplay) {
-            // Ensure element is ready and handle play
-            const attemptPlay = () => {
-                const p = el.play();
-                if (p && typeof p.catch === 'function') {
-                    p.catch((e: any) => {
-                        // console.warn("Autoplay prevented:", e.message);
-                        // If it failed but we want to autoplay, maybe try muting if not already?
-                    });
-                }
-            };
-
-            const timer = setTimeout(attemptPlay, 200);
-            return () => clearTimeout(timer);
-        } else {
-            el.pause();
+        const action = muted ? "mute" : "unMute";
+        try {
+            iframe.contentWindow.postMessage(
+                JSON.stringify({ event: "command", func: action, args: [] }),
+                "*"
+            );
+        } catch (e) {
+            // Ignore cross-origin errors if any
         }
-    }, [autoplay, playbackId]);
+    }, [muted]);
+
+    // Handle Play/Pause without reload (if autoplay prop toggles)
+    useEffect(() => {
+        const iframe = iframeRef.current;
+        if (!iframe?.contentWindow) return;
+
+        const action = autoplay ? "playVideo" : "pauseVideo";
+        try {
+            iframe.contentWindow.postMessage(
+                JSON.stringify({ event: "command", func: action, args: [] }),
+                "*"
+            );
+        } catch (e) {
+            // Ignore
+        }
+    }, [autoplay]);
 
     // Container styles for responsive video
     const containerStyle: CSSProperties = {
@@ -136,47 +136,48 @@ export default function Video({
         aspectRatio: getAspectRatio(),
         overflow: "hidden",
         borderRadius: rounded ? "1rem" : "0",
-        // @ts-ignore
-        "--media-loading-icon-display": showLoadingSpinner ? "block" : "none",
         ...style,
     };
 
+    // Construct YouTube Embed URL
+    const src = useMemo(() => {
+        const params = new URLSearchParams();
+        if (autoplay) params.append("autoplay", "1");
+        if (muted) params.append("mute", "1");
+        if (loop) {
+            params.append("loop", "1");
+            params.append("playlist", playbackId); // Required for loop to work
+        }
+        if (!controls) params.append("controls", "0");
+        params.append("rel", "0"); // Hide related videos
+        params.append("modestbranding", "1");
+        params.append("playsinline", "1");
+        if (startTime) params.append("start", startTime.toString());
+
+        // Enable JS API if you want to control it later
+        params.append("enablejsapi", "1");
+        // Add origin to fix some iOS embedded issues? 
+        // params.append("origin", typeof window !== 'undefined' ? window.location.origin : '');
+
+        return `https://www.youtube.com/embed/${playbackId}?${params.toString()}`;
+    }, [playbackId, loop, controls, startTime]);
+
     return (
         <div style={containerStyle} className={className}>
-            <MuxPlayer
-                ref={playerRef}
-                playbackId={playbackId}
-                metadata={metadata}
-                streamType="on-demand"
-                // autoPlay is handled manually via ref for precise control in carousels
-                muted={muted}
-                loop={loop}
-                preload={preload}
-                playsInline={true}
-                poster={poster}
-                startTime={startTime}
+            <iframe
+                ref={iframeRef}
+                src={src}
                 style={{
                     width: "100%",
                     height: "100%",
+                    border: 0,
                     objectFit: "cover",
+                    pointerEvents: controls ? 'auto' : 'none', // Ensure clicks go through if no controls
                 }}
-                // Event handlers
-                onPlay={onPlay}
-                onPause={onPause}
-                onEnded={onEnded}
-                onError={(e) => {
-                    console.error("Mux Player Error:", e);
-                    // Fallback or retry logic could go here
-                    onError?.(new Error("Video playback error"));
-                }}
-                // Accessibility
-                title={metadata?.video_title || "Video"}
-                // Additional Mux features
-                primaryColor="#3b82f6" // Tailwind blue-500
-                secondaryColor="#1e40af" // Tailwind blue-800
-                // Show/hide controls
-                {...(controls ? {} : { controls: false } as any)}
-            />
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                title={metadata?.video_title || "YouTube Video"}
+            ></iframe>
         </div>
     );
 }
@@ -257,7 +258,7 @@ export function BackgroundVideo({
                 metadata={metadata}
                 orientation="landscape"
                 autoplay={true}
-                muted={false}
+                muted={false} // Note: YouTube Backgrounds often need mute=true to autoplay reliably
                 loop={true}
                 controls={false}
                 preload="auto"
@@ -267,7 +268,9 @@ export function BackgroundVideo({
                     left: 0,
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover",
+                    // objectFit: "cover" doesn't apply to iframes directly in the same way 
+                    // To truly cover, we might need a wrapper that scales the iframe. 
+                    // But for now, we stretch it.
                     zIndex: 0,
                 }}
             />
@@ -281,6 +284,7 @@ export function BackgroundVideo({
                         height: "100%",
                         backgroundColor: `rgba(0, 0, 0, ${overlayOpacity})`,
                         zIndex: 1,
+                        pointerEvents: 'none', // Ensure clicks go through if needed
                     }}
                 />
             )}

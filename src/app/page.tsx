@@ -21,6 +21,21 @@ export default function Home() {
     allImages = [];
   }
 
+  // Discover 4card images
+  const fourCardDir = path.join(process.cwd(), "public", "4card");
+  let fourCardImages: string[] = [];
+  try {
+    if (fs.existsSync(fourCardDir)) {
+      const files = fs.readdirSync(fourCardDir);
+      fourCardImages = files
+        .filter((f) => allowedExt.has(path.extname(f).toLowerCase()))
+        .sort() // You might want a specific order, currently alphabetical
+        .map((f) => `/4card/${f}`);
+    }
+  } catch (e) {
+    fourCardImages = [];
+  }
+
   const heroImages = allImages;
   const galleryImages = allImages;
   return (
@@ -265,18 +280,18 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-3 sm:space-y-4 translate-y-6 sm:translate-y-8">
                   <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
-                    <Image src={galleryImages[0] || '/placeholder'} alt="About 1" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[0] || '/placeholder'} alt="About 1" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
-                    <Image src={galleryImages[1] || '/placeholder'} alt="About 2" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[1] || '/placeholder'} alt="About 2" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
                   <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
-                    <Image src={galleryImages[2] || '/placeholder'} alt="About 3" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[2] || '/placeholder'} alt="About 3" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
-                    <Image src={galleryImages[3] || '/placeholder'} alt="About 4" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[3] || '/placeholder'} alt="About 4" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                 </div>
               </div>

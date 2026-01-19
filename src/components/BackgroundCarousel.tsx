@@ -29,10 +29,7 @@ export default function BackgroundCarousel({
   useEffect(() => {
     if (itemsLength <= 1) return;
 
-    // For videos, we might want longer intervals or rely on onEnded (if we had control over it in this structure)
-    // For now, we use time-based cycling for consistency with the previous request style
-    // But for a single video, we don't need to cycle.
-
+    // For videos, we might want longer intervals or rely on onEnded
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % itemsLength);
     }, intervalMs);
@@ -61,8 +58,6 @@ export default function BackgroundCarousel({
                 controls={false}
                 showLoadingSpinner={false}
                 preload={i === index || i === (index + 1) % itemsLength ? "auto" : "metadata"}
-                // @ts-ignore - MuxPlayer passed props
-                playsInline={true}
                 style={{
                   width: "100%",
                   height: "100%",
