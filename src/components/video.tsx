@@ -19,15 +19,15 @@ export const videoData = [
             video_title: "Test video title",
             viewer_user_id: "user-id-007",
         },
-    },
-    {
-        playbackId: "01Ol7VP8yZSfRjX02QJR188KRY1YE1ZQaxCDu5u43EdD4",
-        metadata: {
-            video_id: "video-id-54321",
-            video_title: "Test video title",
-            viewer_user_id: "user-id-007",
-        },
-    },
+    }
+    // {
+    //     playbackId: "01Ol7VP8yZSfRjX02QJR188KRY1YE1ZQaxCDu5u43EdD4",
+    //     metadata: {
+    //         video_id: "video-id-54321",
+    //         video_title: "Test video title",
+    //         viewer_user_id: "user-id-007",
+    //     },
+    // },
 ];
 
 export interface VideoProps {
