@@ -39,7 +39,7 @@ export default function Home() {
   const heroImages = allImages;
   const galleryImages = allImages;
   return (
-    <main className="relative min-h-screen bg-black text-white selection:bg-emerald-500/30">
+    <main className="relative min-h-screen bg-white text-gray-900 selection:bg-emerald-500/30">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <Navbar />
@@ -89,32 +89,32 @@ export default function Home() {
                 </svg>
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Top Speed</p>
-                <p className="text-xl sm:text-2xl font-bold text-white">60 km/h <span className="text-xs sm:text-sm font-normal text-gray-500">(35 knots)</span></p>
+                <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider">Top Speed</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">60 km/h <span className="text-xs sm:text-sm font-normal text-gray-500">(35 knots)</span></p>
               </div>
             </div>
 
             <div className="glass-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4 transform hover:-translate-y-1 transition-transform duration-300">
-              <div className="p-2 sm:p-3 rounded-full bg-emerald-500/10 text-emerald-400 flex-shrink-0">
+              <div className="p-2 sm:p-3 rounded-full bg-emerald-500/10 text-emerald-600 flex-shrink-0">
                 <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Capacity</p>
-                <p className="text-xl sm:text-2xl font-bold text-white">7 People <span className="text-xs sm:text-sm font-normal text-gray-500">Max</span></p>
+                <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider">Capacity</p>
+                <p className="text-xl sm:text-2xl font-bold text-gray-900">7 People <span className="text-xs sm:text-sm font-normal text-gray-500">Max</span></p>
               </div>
             </div>
 
             <div className="glass-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4 transform hover:-translate-y-1 transition-transform duration-300">
-              <div className="p-2 sm:p-3 rounded-full bg-emerald-500/10 text-emerald-400 flex-shrink-0">
+              <div className="p-2 sm:p-3 rounded-full bg-emerald-500/10 text-emerald-600 flex-shrink-0">
                 <svg className="w-6 h-6 sm:w-8 sm:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <div className="min-w-0">
-                <p className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">Safety First</p>
-                <p className="text-xs sm:text-sm font-medium text-white">Licensed Pilot & Life Jackets</p>
+                <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider">Safety First</p>
+                <p className="text-xs sm:text-sm font-medium text-gray-900">Licensed Pilot & Life Jackets</p>
               </div>
             </div>
           </div>
@@ -131,11 +131,11 @@ export default function Home() {
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-12 sm:mb-20">
-            <span className="text-emerald-400 text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase font-bold mb-2 sm:mb-3 block">
+            <span className="text-emerald-600 text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase font-bold mb-2 sm:mb-3 block">
               Choose Your Adventure
             </span>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 px-4">Curated Packages</h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto px-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 px-4">Curated Packages</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl mx-auto px-4">
               Select the perfect journey for your time and comfort. Each package is designed to show you the best of Alleppey.
             </p>
           </div>
@@ -169,24 +169,24 @@ export default function Home() {
               },
             ].map((pkg, i) => (
               <div key={i} className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-b from-gray-200/50 to-transparent rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative h-full glass-card p-1 rounded-2xl sm:rounded-3xl overflow-hidden hover:border-emerald-500/50 transition-colors duration-500">
-                  <div className="bg-black/40 h-full rounded-[16px] sm:rounded-[20px] p-6 sm:p-8 flex flex-col relative overflow-hidden">
+                  <div className="bg-white/60 h-full rounded-[16px] sm:rounded-[20px] p-6 sm:p-8 flex flex-col relative overflow-hidden backdrop-blur-sm">
                     {/* Badge */}
                     <div className="absolute top-0 right-0 p-4 sm:p-6">
-                      <span className={`px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-gradient-to-r ${pkg.color} text-black`}>{pkg.badge}</span>
+                      <span className={`px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-gradient-to-r ${pkg.color} text-white`}>{pkg.badge}</span>
                     </div>
 
                     <div className="mb-4 sm:mb-6">
-                      <p className="text-gray-400 uppercase tracking-widest text-[10px] sm:text-xs font-bold mb-1 sm:mb-2">{pkg.time}</p>
-                      <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">{pkg.title}</h3>
+                      <p className="text-gray-500 uppercase tracking-widest text-[10px] sm:text-xs font-bold mb-1 sm:mb-2">{pkg.time}</p>
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{pkg.title}</h3>
                       <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-transparent rounded-full" />
                     </div>
 
                     <div className="flex-grow space-y-3 sm:space-y-4 mb-6 sm:mb-8">
                       {pkg.features.map((feature, f) => (
-                        <div key={f} className="flex items-start gap-2 sm:gap-3 text-gray-300 text-xs sm:text-sm">
-                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <div key={f} className="flex items-start gap-2 sm:gap-3 text-gray-600 text-xs sm:text-sm">
+                          <svg className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                           </svg>
                           <span>{feature}</span>
@@ -194,7 +194,7 @@ export default function Home() {
                       ))}
                     </div>
 
-                    <div className="mt-auto pt-4 sm:pt-6 border-t border-white/5 flex items-center justify-between">
+                    <div className="mt-auto pt-4 sm:pt-6 border-t border-gray-200 flex items-center justify-between">
                       <span className="text-[10px] sm:text-xs text-gray-500 flex items-center gap-1">
                         <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0121 18.382V7.618a1 1 0 01-1.447-.894L15 7m0 13V7" />
@@ -214,19 +214,19 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-16 sm:py-24 relative bg-gray-900/30">
+      <section id="about" className="py-16 sm:py-24 relative bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col md:flex-row gap-12 sm:gap-16 items-center">
             <div className="md:w-1/2 space-y-6 sm:space-y-8">
               <div>
-                <span className="text-emerald-400 text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase font-bold mb-2 sm:mb-3 block">
+                <span className="text-emerald-600 text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase font-bold mb-2 sm:mb-3 block">
                   Why Choose Us
                 </span>
-                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6 leading-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
                   Luxury Meets <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-500">Eco-Adventure</span>
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-600">Eco-Adventure</span>
                 </h2>
-                <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
+                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
                   We don't just offer a ride; we offer an experience. Our premium fleet combines the thrill of speed with the comfort of luxury, all while respecting the delicate ecosystem of the backwaters.
                 </p>
               </div>
@@ -263,12 +263,12 @@ export default function Home() {
                   }
                 ].map((item, i) => (
                   <div key={i} className="flex gap-3 sm:gap-4">
-                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gray-800 flex items-center justify-center text-emerald-400 border border-gray-700">
+                    <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-white flex items-center justify-center text-emerald-600 border border-gray-200 shadow-sm">
                       {item.icon}
                     </div>
                     <div>
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-2">{item.title}</h3>
-                      <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
+                      <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 sm:mb-2">{item.title}</h3>
+                      <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </div>
                 ))}
@@ -279,18 +279,18 @@ export default function Home() {
               <div className="aspect-square rounded-full bg-emerald-500/20 absolute blur-3xl inset-0 -z-10" />
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-3 sm:space-y-4 translate-y-6 sm:translate-y-8">
-                  <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
+                  <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
                     <Image src={fourCardImages[0] || '/placeholder'} alt="About 1" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
-                  <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
+                  <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
                     <Image src={fourCardImages[1] || '/placeholder'} alt="About 2" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
-                  <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
+                  <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
                     <Image src={fourCardImages[2] || '/placeholder'} alt="About 3" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
-                  <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-800 overflow-hidden relative">
+                  <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
                     <Image src={fourCardImages[3] || '/placeholder'} alt="About 4" fill className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                 </div>
@@ -305,10 +305,10 @@ export default function Home() {
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-12 gap-4 sm:gap-6">
             <div>
-              <span className="text-emerald-400 text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase font-bold mb-2 sm:mb-3 block">
+              <span className="text-emerald-600 text-xs sm:text-sm tracking-wider sm:tracking-widest uppercase font-bold mb-2 sm:mb-3 block">
                 Visual Journey
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-0">Moments Captured</h2>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-0">Moments Captured</h2>
             </div>
             <a href="https://wa.me/919947753154" className="secondary-button px-4 py-2 sm:px-8 sm:py-3 flex items-center gap-2 text-xs sm:text-sm">
               <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -345,15 +345,15 @@ export default function Home() {
 
       {/* Contact Section */}
       <section id="contact" className="relative py-20 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-emerald-900/20" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
+        <div className="absolute inset-0 bg-emerald-900/5 text-gray-900" />
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-50 via-transparent to-white" />
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-4xl mx-auto glass-card p-6 sm:p-12 text-center relative overflow-hidden">
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent" />
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">Ready for the Adventure?</h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-10 max-w-2xl mx-auto">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">Ready for the Adventure?</h2>
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 mb-8 sm:mb-10 max-w-2xl mx-auto">
               Book your exclusive speedboat tour today. Whether it's a quick thrill or a leisurely cruise, we're ready to welcome you.
             </p>
 
@@ -378,12 +378,12 @@ export default function Home() {
       <Faq />
 
       {/* Footer */}
-      <footer className="footer-gradient text-white pt-16 sm:pt-24 pb-8 sm:pb-12 border-t border-white/5">
+      <footer className="footer-gradient text-gray-900 pt-16 sm:pt-24 pb-8 sm:pb-12 border-t border-gray-200">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-12 mb-12 sm:mb-16">
             <div className="col-span-1 sm:col-span-2">
               <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
-                <span className="text-3xl sm:text-4xl text-emerald-400">
+                <span className="text-3xl sm:text-4xl text-emerald-600">
                   <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="sm:w-10 sm:h-10">
                     <path d="M2 20a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2-1a2.4 2.4 0 0 1 2-1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2-1a2.4 2.4 0 0 1 2-1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2-1" />
                     <path d="M19.9 16.1c.4-.5.7-1.2.4-1.8L16 6c-.5-1.1-1.8-1.7-3.4-1.7c-3-.1-5.6 1.4-8.8 4.7c-1.1 1.1-1.3 2.8-.5 4.1" />
@@ -391,15 +391,15 @@ export default function Home() {
                   </svg>
                 </span>
                 <div>
-                  <h3 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+                  <h3 className="text-xl sm:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">
                     Speed Boat Cruise
                   </h3>
-                  <p className="text-[10px] sm:text-xs text-emerald-500 tracking-[0.2em] font-medium uppercase">
+                  <p className="text-[10px] sm:text-xs text-emerald-600 tracking-[0.2em] font-medium uppercase">
                     Alleppey
                   </p>
                 </div>
               </div>
-              <p className="text-sm sm:text-base text-gray-400 leading-relaxed max-w-sm mb-6 sm:mb-8">
+              <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-sm mb-6 sm:mb-8">
                 Your premium gateway to the backwaters. We create unforgettable memories with a perfect blend of excitement and serenity.
               </p>
               <div className="flex gap-4">
@@ -408,12 +408,12 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6">Explore</h4>
+              <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6">Explore</h4>
               <ul className="space-y-3 sm:space-y-4">
                 {['Packages', 'About Us', 'Gallery', 'Contact'].map((item) => (
                   <li key={item}>
-                    <a href={`#${item.toLowerCase().replace(' ', '')}`} className="text-sm sm:text-base text-gray-400 hover:text-emerald-400 transition-colors flex items-center gap-2 group">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 group-hover:bg-emerald-400 transition-colors" />
+                    <a href={`#${item.toLowerCase().replace(' ', '')}`} className="text-sm sm:text-base text-gray-600 hover:text-emerald-600 transition-colors flex items-center gap-2 group">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 group-hover:bg-emerald-500 transition-colors" />
                       {item}
                     </a>
                   </li>
@@ -422,29 +422,29 @@ export default function Home() {
             </div>
 
             <div>
-              <h4 className="text-base sm:text-lg font-bold text-white mb-4 sm:mb-6">Contact</h4>
-              <ul className="space-y-3 sm:space-y-4 text-gray-400">
+              <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6">Contact</h4>
+              <ul className="space-y-3 sm:space-y-4 text-gray-600">
                 <li className="flex items-start gap-2 sm:gap-3">
                   <span className="text-emerald-500 mt-1 text-sm sm:text-base">📍</span>
                   <span className="text-sm sm:text-base">Finishing Point,<br />Alleppey, Kerala</span>
                 </li>
                 <li className="flex items-center gap-2 sm:gap-3">
                   <span className="text-emerald-500 text-sm sm:text-base">📞</span>
-                  <a href="tel:+919947753154" className="text-sm sm:text-base hover:text-white transition-colors">+91 9947753154</a>
+                  <a href="tel:+919947753154" className="text-sm sm:text-base hover:text-gray-900 transition-colors">+91 9947753154</a>
                 </li>
                 <li className="flex items-center gap-2 sm:gap-3">
                   <span className="text-emerald-500 text-sm sm:text-base">✉️</span>
-                  <a href="mailto:abhijithabcd74@gmail.com" className="text-sm sm:text-base hover:text-white transition-colors">Bookings</a>
+                  <a href="mailto:abhijithabcd74@gmail.com" className="text-sm sm:text-base hover:text-gray-900 transition-colors">Bookings</a>
                 </li>
               </ul>
             </div>
           </div>
 
-          <div className="border-t border-white/5 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500">
+          <div className="border-t border-gray-200 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500">
             <p className="text-center sm:text-left">© {new Date().getFullYear()} Speed Boat Cruise Alleppey. All rights reserved.</p>
             <div className="flex gap-4 sm:gap-6">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-gray-900 transition-colors">Terms of Service</a>
             </div>
           </div>
         </div>

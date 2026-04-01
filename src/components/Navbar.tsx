@@ -6,21 +6,21 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="absolute top-0 left-0 w-full z-50 border-b border-white/10 bg-black backdrop-blur-[2px]">
+    <nav className="absolute top-0 left-0 w-full z-50 border-b border-gray-200/50 bg-white/90 backdrop-blur-md shadow-sm">
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <a href="#" className="flex items-center gap-3 group">
             <span className="text-emerald-400 group-hover:scale-110 transition-transform duration-300">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M2 20a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2-1a2.4 2.4 0 0 1 2-1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2-1a2.4 2.4 0 0 1 2-1a2.4 2.4 0 0 1 2 1a2.4 2.4 0 0 0 2 1a2.4 2.4 0 0 0 2-1" />
                 <path d="M19.9 16.1c.4-.5.7-1.2.4-1.8L16 6c-.5-1.1-1.8-1.7-3.4-1.7c-3-.1-5.6 1.4-8.8 4.7c-1.1 1.1-1.3 2.8-.5 4.1" />
                 <path d="M7 13.2a4 4 0 0 0 6.4-1.6" />
               </svg>
             </span>
             <div>
-              <h1 className="text-xl font-bold text-white tracking-tight">Speed Boat Cruise</h1>
-              <p className="text-[10px] text-emerald-400 uppercase tracking-[0.2em] font-medium">Alleppey</p>
+              <h1 className="text-lg font-bold text-gray-900 tracking-tight">Speed Boat Cruise</h1>
+              <p className="text-[10px] text-emerald-600 uppercase tracking-[0.2em] font-medium">Alleppey</p>
             </div>
           </a>
 
@@ -35,7 +35,7 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className="md:hidden text-gray-900 p-2 hover:bg-gray-100 rounded-lg transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? (
@@ -52,12 +52,12 @@ export default function Navbar() {
       </div>
 
       {/* Mobile Menu Overlay */}
-      <div className={`md:hidden absolute top-20 left-0 w-full bg-black/95 backdrop-blur-xl border-t border-white/10 transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
+      <div className={`md:hidden absolute top-16 left-0 w-full bg-white/95 backdrop-blur-xl border-t border-gray-200 transition-all duration-300 overflow-hidden shadow-lg ${mobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="flex flex-col p-6 gap-4">
-          <a href="#packages" className="text-lg text-white/90 hover:text-emerald-400 py-2 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Packages</a>
-          <a href="#about" className="text-lg text-white/90 hover:text-emerald-400 py-2 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>About</a>
-          <a href="#gallery" className="text-lg text-white/90 hover:text-emerald-400 py-2 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Gallery</a>
-          <a href="#contact" className="text-lg text-white/90 hover:text-emerald-400 py-2 border-b border-white/5" onClick={() => setMobileMenuOpen(false)}>Contact</a>
+          <a href="#packages" className="text-lg text-gray-700 hover:text-emerald-600 py-2 border-b border-gray-100" onClick={() => setMobileMenuOpen(false)}>Packages</a>
+          <a href="#about" className="text-lg text-gray-700 hover:text-emerald-600 py-2 border-b border-gray-100" onClick={() => setMobileMenuOpen(false)}>About</a>
+          <a href="#gallery" className="text-lg text-gray-700 hover:text-emerald-600 py-2 border-b border-gray-100" onClick={() => setMobileMenuOpen(false)}>Gallery</a>
+          <a href="#contact" className="text-lg text-gray-700 hover:text-emerald-600 py-2 border-b border-gray-100" onClick={() => setMobileMenuOpen(false)}>Contact</a>
           <a href="#contact" className="primary-button text-center mt-2 py-3" onClick={() => setMobileMenuOpen(false)}>Book Now</a>
         </div>
       </div>
