@@ -430,7 +430,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-2 sm:gap-3">
                   <span className="text-emerald-500 text-sm sm:text-base">📞</span>
-                  <a href="tel:+917012761588" className="text-sm sm:text-base hover:text-gray-900 transition-colors">+91 9947753154</a>
+                  <a href="tel:+917012761588" className="text-sm sm:text-base hover:text-gray-900 transition-colors">+91 917012761588</a>
                 </li>
                 <li className="flex items-center gap-2 sm:gap-3">
                   <span className="text-emerald-500 text-sm sm:text-base">✉️</span>
