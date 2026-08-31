@@ -34,7 +34,7 @@ export default function RootLayout({
       <body className={`${poppins.variable} font-sans`}>
         {children}
         <a
-          href="https://wa.me/917012761588"
+          href="https://wa.me/917012761588?text=Hi!%20I'd%20like%20to%20book%20a%20speedboat%20cruise.%20Could%20you%20please%20share%20availability%20and%20pricing%3F"
           target="_blank"
           rel="noopener noreferrer"
           className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3 sm:p-4 rounded-full shadow-lg shadow-[#25D366]/40 hover:scale-110 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
