@@ -71,7 +71,7 @@ export default function BackgroundCarousel({
           ))}
 
           {/* Mute Toggle Button */}
-          <div className="absolute bottom-24 md:bottom-36 right-8 z-30 animate-fade-in pointer-events-auto">
+          <div className="absolute bottom-36 md:bottom-28 right-5 md:right-8 z-30 animate-fade-in pointer-events-auto">
             <button
               onClick={() => setIsMuted(!isMuted)}
               className="p-3 rounded-full bg-black/40 hover:bg-black/60 text-white backdrop-blur-md border border-white/20 transition-all hover:scale-105 hover:border-emerald-500/50 group"

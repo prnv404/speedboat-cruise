@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 const faqData = [
     {
-        question: "How do I book, and what is the cancellation policy?",
+        question: "How do I book a speed boat in Alleppey, and what is the cancellation policy?",
+        plainAnswer: "Booking is easy! You can check availability and book directly through our website form or WhatsApp. We offer a 100% Full Refund if you cancel at least 24 hours before your trip. If we have to cancel due to bad weather or safety reasons, you will receive an immediate full refund.",
         answer: (
             <div className="space-y-4">
                 <p><strong>Booking is easy!</strong> You can check availability and book directly through our website form or WhatsApp.</p>
@@ -20,7 +21,8 @@ const faqData = [
         )
     },
     {
-        question: "What is included in the ride?",
+        question: "What is included in the speed boat ride in Alleppey?",
+        plainAnswer: "Our speed boat packages in Alleppey are all-inclusive with no hidden charges. You get a private 7-seater speed boat just for your group, a certified captain, life jackets for everyone, a guided backwater tour with insights on local culture and nature, and eco-friendly engines that protect the backwaters.",
         answer: (
             <div className="space-y-4">
                 <p>Our packages are all-inclusive with no hidden charges. You get:</p>
@@ -41,7 +43,8 @@ const faqData = [
         )
     },
     {
-        question: "What is the best time for a Speed Boat ride?",
+        question: "What is the best time for a speed boat ride in Alleppey?",
+        plainAnswer: "For the most magical speed boat experience in Alleppey, we recommend Sunrise (6:30 AM) for calm waters, birdwatching, and pure silence, or Sunset (5:00 PM) for golden views and a cooler breeze. We operate daily from 6:00 AM to 6:30 PM.",
         answer: (
             <div className="space-y-4">
                 <p>For the most magical experience, we recommend:</p>
@@ -66,7 +69,8 @@ const faqData = [
         )
     },
     {
-        question: "Is the ride safe for kids and seniors?",
+        question: "Is the speed boat ride in Alleppey safe for kids and seniors?",
+        plainAnswer: "Absolutely. Our speed boat in Alleppey is rated as a Family-Friendly service. Our boats are stable and comfortable for all ages, we have specific life jackets for kids, and our captains maintain a safe speed for families and the elderly.",
         answer: (
             <div className="space-y-2">
                 <p><strong>Absolutely.</strong> We are rated as a Family-Friendly service.</p>
@@ -79,9 +83,10 @@ const faqData = [
         )
     },
     {
-        question: "Do you have any tips for a better experience?",
+        question: "Do you have any tips for the best speed boat experience in Alleppey?",
+        plainAnswer: "Yes! Since the water reflects sunlight during your speed boat ride in Alleppey, we highly recommend bringing Sunglasses for a comfortable and enjoyable view of the backwaters.",
         answer: (
-            <p>Yes! Since the water reflects sunlight, we highly recommend bringing <strong>Sunglasses</strong> for a comfortable view.</p>
+            <p>Yes! Since the water reflects sunlight, we highly recommend bringing <strong>Sunglasses</strong> for a comfortable view of the Alleppey backwaters.</p>
         )
     }
 ];
@@ -111,7 +116,7 @@ export default function Faq() {
                         >
                             <button
                                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
+                                className="w-full text-left px-5 sm:px-6 py-4 sm:py-5 flex items-center justify-between gap-4 min-h-[60px]"
                                 aria-expanded={openIndex === index}
                             >
                                 <span className={`text-base sm:text-lg font-medium transition-colors ${openIndex === index ? 'text-gray-900' : 'text-gray-700 group-hover:text-gray-900'
@@ -143,7 +148,7 @@ export default function Faq() {
                 </div>
             </div>
 
-            {/* JSON-LD Schema for SEO */}
+            {/* JSON-LD Schema for SEO — FAQ Rich Results */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
@@ -155,7 +160,7 @@ export default function Faq() {
                             "name": item.question,
                             "acceptedAnswer": {
                                 "@type": "Answer",
-                                "text": typeof item.answer === 'string' ? item.answer : "Check our website for details." // Simplified for object content
+                                "text": item.plainAnswer
                             }
                         }))
                     })

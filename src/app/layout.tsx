@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import type { Viewport } from "next";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -8,13 +9,60 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+const siteUrl = "https://www.speedboatcruisealleppey.com";
+
 export const metadata: Metadata = {
-  title: "Speed Boat Cruise Alleppey | #1 Private Backwater Boat cruise",
+  title: "Speed Boat in Alleppey | #1 Private Backwater Speed Boat Cruise",
   description:
-    "Looking for the best boat ride in Alleppey? Experience our private speed boat tours with thrilling speed and sightseeing through  village canals. Book your ride today!.",
+    "Book the best speed boat in Alleppey! Private 7-seater speedboat rides through Kerala backwaters, Vembanad Lake & village canals. Licensed pilot, life jackets included. Call now!",
+  keywords: [
+    "speed boat in alleppey",
+    "speedboat alleppey",
+    "speed boat ride alleppey",
+    "alleppey speed boat tour",
+    "speed boat cruise alleppey",
+    "backwater speed boat alleppey",
+    "private speed boat alleppey",
+    "boat ride alleppey",
+    "alleppey boat tour",
+    "vembanad lake speed boat",
+  ],
+  alternates: {
+    canonical: siteUrl,
+  },
+  openGraph: {
+    title: "Speed Boat in Alleppey | #1 Private Backwater Speed Boat Cruise",
+    description:
+      "Experience the thrill of a private speed boat in Alleppey's stunning backwaters. 10-min, 30-min & 1-hour packages available. 5★ on Google with 221+ reviews.",
+    url: siteUrl,
+    siteName: "Speed Boat Cruise Alleppey",
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Speed Boat in Alleppey | #1 Private Backwater Speed Boat Cruise",
+    description:
+      "Experience the thrill of a private speed boat in Alleppey's stunning backwaters. 10-min, 30-min & 1-hour packages. Rated 5★ on Google.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+    },
+  },
   icons: {
     icon: '/favicon.png',
   },
+};
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({
@@ -30,6 +78,73 @@ export default function RootLayout({
           data-project="67c40fd097d306c713a0bd02"
           src="https://cdn.jsdelivr.net/gh/litlyx/litlyx-js/browser/litlyx.js"
         ></script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": ["LocalBusiness", "TouristAttraction"],
+              "name": "Speed Boat Cruise Alleppey",
+              "description": "The best speed boat in Alleppey offering private backwater tours through Vembanad Lake and Kerala village canals. 10-min, 30-min and 1-hour packages available.",
+              "url": "https://www.speedboatcruisealleppey.com",
+              "telephone": "+917012761588",
+              "email": "abhijithabcd74@gmail.com",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Finishing Point",
+                "addressLocality": "Alappuzha",
+                "addressRegion": "Kerala",
+                "postalCode": "688012",
+                "addressCountry": "IN"
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 9.4981,
+                "longitude": 76.3388
+              },
+              "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5.0",
+                "reviewCount": "221",
+                "bestRating": "5",
+                "worstRating": "1"
+              },
+              "priceRange": "₹₹",
+              "openingHoursSpecification": {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+                "opens": "06:00",
+                "closes": "18:30"
+              },
+              "hasOfferCatalog": {
+                "@type": "OfferCatalog",
+                "name": "Speed Boat Tours in Alleppey",
+                "itemListElement": [
+                  {
+                    "@type": "Offer",
+                    "name": "Quick Thrill – 10-Minute Speed Boat Ride",
+                    "description": "A 7 km fun speed boat ride in Alleppey's Punnamada Lake.",
+                    "priceCurrency": "INR"
+                  },
+                  {
+                    "@type": "Offer",
+                    "name": "Lake Explorer – 30-Minute Speed Boat Tour",
+                    "description": "15 km speed boat tour covering Alleppey terminals, boat race track, and Vembanad Lake.",
+                    "priceCurrency": "INR"
+                  },
+                  {
+                    "@type": "Offer",
+                    "name": "Village Discovery – 1-Hour Speed Boat Cruise",
+                    "description": "30 km comprehensive speed boat cruise in Alleppey covering village canals, Kayinakary Photo Point, and Vembanad Lake.",
+                    "priceCurrency": "INR"
+                  }
+                ]
+              },
+              "touristType": ["Family", "Couple", "Adventure Seekers"],
+              "keywords": "speed boat in alleppey, speedboat alleppey, backwater speed boat, alleppey boat tour"
+            })
+          }}
+        />
       </head>
       <body className={`${poppins.variable} font-sans`}>
         {children}
@@ -37,11 +152,11 @@ export default function RootLayout({
           href="https://wa.me/917012761588?text=Hi!%20I'd%20like%20to%20book%20a%20speedboat%20cruise.%20Could%20you%20please%20share%20availability%20and%20pricing%3F"
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-3 sm:p-4 rounded-full shadow-lg shadow-[#25D366]/40 hover:scale-110 hover:-translate-y-1 transition-all duration-300 flex items-center justify-center group"
+          className="hidden md:flex fixed bottom-6 right-6 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg shadow-[#25D366]/40 hover:scale-110 hover:-translate-y-1 transition-all duration-300 items-center justify-center group"
           aria-label="WhatsApp Contact"
         >
           <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-20"></span>
-          <svg className="w-8 h-8 sm:w-10 sm:h-10 relative z-10" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-10 h-10 relative z-10" fill="currentColor" viewBox="0 0 24 24">
             <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
           </svg>
         </a>
