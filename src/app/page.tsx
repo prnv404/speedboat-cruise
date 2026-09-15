@@ -70,7 +70,7 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight animate-slide-up px-4" style={{ animationDelay: '0.2s' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight animate-slide-up px-4" style={{ animationDelay: '0.2s' }}>
               #1 Speed Boat in <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Alleppey</span>
               <br className="hidden sm:block" />
               Private Backwater Cruise
@@ -119,7 +119,7 @@ export default function Home() {
       </section>
 
       {/* Feature Band */}
-      <section className="relative z-20 -mt-0 sm:-mt-20 py-12 sm:pb-20 pointer-events-none">
+      <section className="relative z-20 -mt-8 sm:-mt-20 pt-8 pb-12 sm:py-12 sm:pb-20 pointer-events-none">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto pointer-events-auto">
             <div className="glass-card p-4 sm:p-6 flex items-center gap-3 sm:gap-4 transform hover:-translate-y-1 transition-transform duration-300">

@@ -50,17 +50,15 @@ export default function Navbar() {
       */}
       <div
         style={{ pointerEvents: 'auto' }}
-        className={`w-full transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-          scrolled
-            ? 'max-w-5xl mt-3 rounded-2xl bg-white/90 backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-white/70 px-5'
-            : 'max-w-full mt-0 rounded-none bg-transparent border-b border-white/10 px-6 lg:px-8'
-        }`}
+        className={`transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] mx-auto ${scrolled
+            ? 'w-[calc(100%-24px)] sm:w-[calc(100%-48px)] max-w-5xl mt-3 rounded-2xl bg-white/90 backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.12)] border border-white/70 px-4 sm:px-5'
+            : 'w-full mt-0 rounded-none bg-transparent border-b border-white/10 px-6 lg:px-8'
+          }`}
       >
         {/* Row — height shrinks on scroll */}
         <div
-          className={`flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
-            scrolled ? 'h-[58px]' : 'h-[70px]'
-          }`}
+          className={`flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${scrolled ? 'h-[58px]' : 'h-[70px]'
+            }`}
         >
 
           {/* ── Logo ── */}
@@ -78,9 +76,8 @@ export default function Navbar() {
 
             <div className="leading-tight">
               <span
-                className={`block font-bold tracking-tight transition-all duration-500 ${
-                  scrolled ? 'text-[14px] text-gray-900' : 'text-[15px] text-white drop-shadow-md'
-                }`}
+                className={`block font-bold tracking-tight transition-all duration-500 ${scrolled ? 'text-[14px] text-gray-900' : 'text-[15px] text-white drop-shadow-md'
+                  }`}
               >
                 Speed Boat Cruise
               </span>
@@ -96,11 +93,10 @@ export default function Navbar() {
               <a
                 key={label}
                 href={href}
-                className={`relative px-3.5 py-2 text-[12px] font-medium uppercase tracking-widest transition-colors duration-300 rounded-lg group ${
-                  scrolled
+                className={`relative px-3.5 py-2 text-[12px] font-medium uppercase tracking-widest transition-colors duration-300 rounded-lg group ${scrolled
                     ? 'text-gray-600 hover:text-emerald-600'
                     : 'text-white/80 hover:text-white'
-                }`}
+                  }`}
               >
                 {label}
                 <span className="absolute bottom-1 left-3.5 right-3.5 h-[1.5px] bg-emerald-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left rounded-full" />
@@ -110,9 +106,8 @@ export default function Navbar() {
             {/* CTA — always vivid */}
             <a
               href="#contact"
-              className={`ml-3 relative inline-flex items-center gap-1.5 font-bold uppercase tracking-widest text-white overflow-hidden group rounded-xl transition-all duration-500 ${
-                scrolled ? 'px-5 py-2 text-[11px]' : 'px-6 py-2.5 text-[12px]'
-              }`}
+              className={`ml-3 relative inline-flex items-center gap-1.5 font-bold uppercase tracking-widest text-white overflow-hidden group rounded-xl transition-all duration-500 ${scrolled ? 'px-5 py-2 text-[11px]' : 'px-6 py-2.5 text-[12px]'
+                }`}
             >
               <span className="absolute inset-0 bg-gradient-to-br from-emerald-500 to-teal-600 group-hover:from-emerald-400 group-hover:to-teal-500 transition-all duration-300" />
               <span className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md bg-emerald-400/50" />
@@ -141,9 +136,8 @@ export default function Navbar() {
           {/* ── Mobile Hamburger ── */}
           <button
             aria-label="Toggle navigation menu"
-            className={`md:hidden p-2.5 rounded-xl transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center ${
-              scrolled ? 'text-gray-800 hover:bg-gray-100 active:bg-gray-200' : 'text-white hover:bg-white/10 active:bg-white/20'
-            }`}
+            className={`md:hidden p-2.5 rounded-xl transition-colors duration-200 min-w-[44px] min-h-[44px] flex items-center justify-center ${scrolled ? 'text-gray-800 hover:bg-gray-100 active:bg-gray-200' : 'text-white hover:bg-white/10 active:bg-white/20'
+              }`}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -160,11 +154,10 @@ export default function Navbar() {
       {/* ── Mobile Drawer ── */}
       <div
         style={{ pointerEvents: mobileMenuOpen ? 'auto' : 'none' }}
-        className={`md:hidden w-full overflow-hidden transition-all duration-300 ease-in-out ${
-          mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-        } ${scrolled ? 'max-w-5xl' : 'max-w-full'}`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out mx-auto ${mobileMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+          } ${scrolled ? 'w-[calc(100%-24px)] sm:w-[calc(100%-48px)] max-w-5xl mt-2 rounded-2xl shadow-lg' : 'w-full'}`}
       >
-        <div className="bg-white/97 backdrop-blur-2xl border-t border-gray-100 shadow-2xl px-6 py-4 flex flex-col gap-1 rounded-b-2xl">
+        <div className={`bg-white/97 backdrop-blur-2xl border-t border-gray-100 px-6 py-4 flex flex-col gap-1 ${scrolled ? 'rounded-2xl' : 'rounded-b-2xl shadow-2xl'}`}>
           {navLinks.map(({ label, href }) => (
             <a
               key={label}
