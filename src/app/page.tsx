@@ -43,14 +43,14 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-white text-gray-900 selection:bg-emerald-500/30 pb-[80px] md:pb-0">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[115vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
         <Navbar />
         <div className="absolute inset-0 z-0">
           <BackgroundCarousel videos={videoData} />
           <div className="absolute inset-0 hero-gradient pointer-events-none" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 py-20 sm:py-32 pointer-events-none">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 py-28 sm:py-44 pointer-events-none">
           <div className="max-w-4xl mx-auto text-center space-y-4 sm:space-y-7 animate-fade-in pointer-events-auto">
 
             {/* Social proof pill */}
@@ -76,13 +76,9 @@ export default function Home() {
               Private Backwater Cruise
             </h1>
 
-            <p className="text-white/80 text-sm sm:text-lg max-w-xl mx-auto px-4 animate-slide-up" style={{ animationDelay: '0.3s' }}>
-              Private 7-seater boat · Licensed pilot · Life jackets included
-              <br className="hidden sm:block" />
-              10-min, 30-min &amp; 1-hour packages from Finishing Point, Alleppey
-            </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 animate-slide-up px-4" style={{ animationDelay: '0.4s' }}>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 animate-slide-up px-4 mt-8 sm:mt-10" style={{ animationDelay: '0.4s' }}>
               <a
                 href="https://wa.me/917012761588?text=Hi!%20I'd%20like%20to%20book%20a%20speed%20boat%20in%20Alleppey.%20Could%20you%20share%20availability%20and%20pricing%3F"
                 target="_blank"
@@ -103,10 +99,7 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Micro-trust below CTAs */}
-            <p className="text-white/50 text-[11px] sm:text-xs animate-slide-up px-4" style={{ animationDelay: '0.5s' }}>
-              ✓ Instant confirmation &nbsp;·&nbsp; ✓ Free cancellation 24h before &nbsp;·&nbsp; ✓ Private boat, no sharing
-            </p>
+
 
           </div>
         </div>
@@ -410,11 +403,12 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 auto-rows-[220px] sm:auto-rows-[260px] lg:auto-rows-[300px]">
+          {/* Gallery grid: 1-col mobile → 2-col tablet → 3-col desktop, uniform rows */}
+          <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 auto-rows-[240px] sm:auto-rows-[280px] lg:auto-rows-[360px]">
             {galleryImages.slice(0, 6).map((src, index) => (
               <div
                 key={index}
-                className={`group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer ${index === 0 || index === 3 ? 'sm:col-span-2' : ''}`}
+                className="group relative rounded-xl sm:rounded-2xl overflow-hidden cursor-pointer"
               >
                 <Image
                   src={src}
@@ -423,11 +417,6 @@ export default function Home() {
                   loading={index < 2 ? 'eager' : 'lazy'}
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-sm">
-                  <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <p className="text-white text-sm sm:text-base font-medium tracking-wider">VIEW FULLSIZE</p>
-                  </div>
-                </div>
               </div>
             ))}
           </div>
