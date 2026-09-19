@@ -23,7 +23,7 @@ export default function StickyBookingBar() {
 
       <div
         className="bg-white border-t border-gray-200 shadow-[0_-8px_32px_rgba(0,0,0,0.12)] px-4 flex gap-3 items-center"
-        style={{ paddingTop: '10px', paddingBottom: 'calc(10px + env(safe-area-inset-bottom))' }}
+        style={{ paddingTop: '10px', paddingBottom: 'calc(28px + env(safe-area-inset-bottom))' }}
       >
         {/* Urgency text */}
         <div className="flex-1 min-w-0">
