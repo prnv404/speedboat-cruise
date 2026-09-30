@@ -191,10 +191,14 @@ export default function AlleppeyTourGuide() {
       </article>
 
       <footer className="border-t border-gray-100 py-8 text-center text-sm text-gray-500">
-        <div className="flex flex-wrap justify-center gap-6">
+        <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
           <Link href="/" className="hover:text-emerald-600 transition-colors">Home</Link>
+          <Link href="/about" className="hover:text-emerald-600 transition-colors">About</Link>
+          <Link href="/gallery" className="hover:text-emerald-600 transition-colors">Gallery</Link>
           <Link href="/blog" className="hover:text-emerald-600 transition-colors">Blog</Link>
           <Link href="/contact" className="hover:text-emerald-600 transition-colors">Contact</Link>
+          <Link href="/privacy-policy" className="hover:text-emerald-600 transition-colors">Privacy Policy</Link>
+          <Link href="/terms-and-conditions" className="hover:text-emerald-600 transition-colors">Terms of Service</Link>
         </div>
         <p className="mt-4">© {new Date().getFullYear()} Speed Boat Cruise Alleppey. All rights reserved.</p>
       </footer>

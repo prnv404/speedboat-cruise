@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import BackgroundCarousel from "@/components/BackgroundCarousel";
 import Faq from "@/components/Faq";
@@ -357,6 +358,14 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+              <div className="pt-4 sm:pt-6">
+                <Link href="/about" className="inline-flex items-center gap-2 text-emerald-600 font-bold hover:text-emerald-700 transition-colors group text-sm sm:text-base">
+                  Read Our Full Story
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </Link>
+              </div>
             </div>
 
             <div className="md:w-1/2 relative w-full">
@@ -394,14 +403,19 @@ export default function Home() {
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-0">Speed Boat in Alleppey — Moments Captured</h2>
             </div>
-            <a href="https://wa.me/917012761588" className="secondary-button px-4 py-2 sm:px-8 sm:py-3 flex items-center gap-2 text-xs sm:text-sm">
-              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="hidden sm:inline">Share Your Photos</span>
-              <span className="sm:hidden">Share</span>
-            </a>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <Link href="/gallery" className="text-emerald-600 font-bold hover:text-emerald-700 text-sm hidden sm:block mr-2 transition-colors">
+                View Full Gallery →
+              </Link>
+              <a href="https://wa.me/917012761588" className="secondary-button px-4 py-2 sm:px-6 sm:py-3 flex items-center gap-2 text-xs sm:text-sm">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span className="hidden sm:inline">Share Your Photos</span>
+                <span className="sm:hidden">Share</span>
+              </a>
+            </div>
           </div>
 
           {/* Gallery grid: 1-col mobile → 2-col tablet → 3-col desktop, uniform rows */}
@@ -646,6 +660,52 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Blog Section */}
+      <section className="py-16 sm:py-24 bg-white border-t border-gray-100">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-12 gap-4">
+            <div>
+              <span className="text-emerald-600 text-xs sm:text-sm tracking-wider uppercase font-bold mb-2 block">
+                Local Knowledge
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Latest Travel Guides</h2>
+            </div>
+            <Link href="/blog" className="text-emerald-600 font-bold hover:text-emerald-700 text-sm transition-colors">
+              View All Articles →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Link href="/blog/things-to-do-in-alleppey" className="group flex flex-col bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:border-emerald-300 transition-colors">
+              <div className="relative h-48 overflow-hidden">
+                <Image src="/og-image.jpg" alt="Things to do in Alleppey" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-emerald-700">10 Best Things to Do in Alleppey</h3>
+                <p className="text-sm text-gray-600 line-clamp-2">The definitive local guide to the best experiences in Alleppey, Kerala.</p>
+              </div>
+            </Link>
+            <Link href="/blog/speed-boat-vs-houseboat-alleppey" className="group flex flex-col bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:border-emerald-300 transition-colors">
+              <div className="relative h-48 overflow-hidden">
+                <Image src="/og-image.jpg" alt="Speed boat vs houseboat" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-emerald-700">Speed Boat vs Houseboat</h3>
+                <p className="text-sm text-gray-600 line-clamp-2">An honest comparison to help you choose the best backwater experience.</p>
+              </div>
+            </Link>
+            <Link href="/blog/alleppey-backwater-tour-guide" className="group flex flex-col bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:border-emerald-300 transition-colors">
+              <div className="relative h-48 overflow-hidden">
+                <Image src="/og-image.jpg" alt="Alleppey tour guide" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+              <div className="p-6">
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-emerald-700">Complete Tour Guide</h3>
+                <p className="text-sm text-gray-600 line-clamp-2">Prices, tips, and everything you need to know before booking.</p>
+              </div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <Faq />
       <StickyBookingBar />
 
@@ -682,12 +742,12 @@ export default function Home() {
             <div>
               <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6">Explore</h4>
               <ul className="space-y-3 sm:space-y-4">
-                {['Packages', 'About Us', 'Gallery', 'Contact'].map((item) => (
-                  <li key={item}>
-                    <a href={`#${item.toLowerCase().replace(' ', '')}`} className="text-sm sm:text-base text-gray-600 hover:text-emerald-600 transition-colors flex items-center gap-2 group">
+                {[{label: 'Packages', href: '/#packages'}, {label: 'About Us', href: '/about'}, {label: 'Gallery', href: '/gallery'}, {label: 'Blog', href: '/blog'}, {label: 'Contact', href: '/contact'}].map((item) => (
+                  <li key={item.label}>
+                    <Link href={item.href} className="text-sm sm:text-base text-gray-600 hover:text-emerald-600 transition-colors flex items-center gap-2 group">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 group-hover:bg-emerald-500 transition-colors" />
-                      {item}
-                    </a>
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

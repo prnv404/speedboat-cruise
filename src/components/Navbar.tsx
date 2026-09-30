@@ -24,10 +24,10 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: 'Packages', href: '#packages' },
-    { label: 'About', href: '#about' },
-    { label: 'Gallery', href: '#gallery' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Packages', href: '/#packages' },
+    { label: 'About', href: '/about' },
+    { label: 'Gallery', href: '/gallery' },
+    { label: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -105,7 +105,7 @@ export default function Navbar() {
 
             {/* CTA — always vivid */}
             <a
-              href="#contact"
+              href="/contact"
               className={`ml-3 relative inline-flex items-center gap-1.5 font-bold uppercase tracking-widest text-white overflow-hidden group rounded-xl transition-all duration-500 ${scrolled ? 'px-5 py-2 text-[11px]' : 'px-6 py-2.5 text-[12px]'
                 }`}
             >
@@ -171,7 +171,7 @@ export default function Navbar() {
           ))}
 
           <a
-            href="#contact"
+            href="/contact"
             onClick={() => setMobileMenuOpen(false)}
             className="mt-3 relative flex items-center justify-center gap-2 py-3.5 rounded-xl text-white text-sm font-bold uppercase tracking-widest overflow-hidden group"
           >
