@@ -199,8 +199,8 @@ export default function RootLayout({
       </head>
       <body className={`${poppins.variable} font-sans`}>
         {children}
-        {/* WhatsApp Floating Action Button — visible on all devices */}
-        <div className="fixed bottom-28 right-4 md:bottom-6 md:right-6 z-[60] flex items-center gap-3">
+        {/* WhatsApp Floating Action Button — visible on md+ devices */}
+        <div className="fixed bottom-28 right-4 md:bottom-6 md:right-6 z-[60] hidden md:flex items-center gap-3">
           {/* Chat Bubble Tooltip */}
           <div className="bg-white text-gray-800 text-sm font-bold px-4 py-2 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.12)] border border-gray-100 hidden sm:block animate-bounce">
             Chat with us

@@ -28,10 +28,6 @@ export default function StickyBookingBar() {
         {/* Urgency text + social proof */}
         <div className="flex-1 min-w-0">
           <p className="text-[12px] font-bold text-gray-900 leading-tight">Book a Speed Boat Today!</p>
-          <p className="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
-            <span className="text-yellow-400">⭐</span>
-            5.0 · 221+ reviews · Free cancellation
-          </p>
         </div>
 
         {/* Call CTA */}
