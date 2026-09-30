@@ -25,6 +25,7 @@ export default function BackgroundCarousel({
   const [index, setIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
   const [videoReady, setVideoReady] = useState(false);
+  const [loadVideos, setLoadVideos] = useState(false);
 
   // Determine which mode we are in
   const mode = videos && videos.length > 0 ? "video" : images && images.length > 0 ? "image" : "none";
@@ -43,8 +44,9 @@ export default function BackgroundCarousel({
   // Mark video as ready after a short delay so poster fades out gracefully
   useEffect(() => {
     if (mode === "video") {
-      const t = setTimeout(() => setVideoReady(true), 2000);
-      return () => clearTimeout(t);
+      const t1 = setTimeout(() => setLoadVideos(true), 3500); // Wait 3.5s before loading iframes
+      const t2 = setTimeout(() => setVideoReady(true), 5500); // Fade out poster after videos load
+      return () => { clearTimeout(t1); clearTimeout(t2); };
     }
   }, [mode]);
 
@@ -70,7 +72,7 @@ export default function BackgroundCarousel({
       )}
 
       {/* Video Mode */}
-      {mode === "video" && videos && (
+      {mode === "video" && videos && loadVideos && (
         <>
           {videos.map((video, i) => (
             <div

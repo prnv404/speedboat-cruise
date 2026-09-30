@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import type { Viewport } from "next";
+import Script from "next/script";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -89,11 +90,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <script
-          defer
+        <Script
+          strategy="lazyOnload"
           data-project="67c40fd097d306c713a0bd02"
           src="https://cdn.jsdelivr.net/gh/litlyx/litlyx-js/browser/litlyx.js"
-        ></script>
+        />
 
         {/* LocalBusiness + TouristAttraction Schema */}
         <script
