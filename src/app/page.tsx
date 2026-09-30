@@ -715,8 +715,9 @@ export default function Home() {
           <div className="border-t border-gray-200 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-500">
             <p className="text-center sm:text-left">© {new Date().getFullYear()} Speed Boat Cruise Alleppey. All rights reserved.</p>
             <div className="flex gap-4 sm:gap-6">
-              <a href="#" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-gray-900 transition-colors">Terms of Service</a>
+              <a href="/privacy-policy" className="hover:text-gray-900 transition-colors">Privacy Policy</a>
+              <a href="/terms-and-conditions" className="hover:text-gray-900 transition-colors">Terms of Service</a>
+              <a href="/contact" className="hover:text-gray-900 transition-colors">Contact</a>
             </div>
           </div>
         </div>
