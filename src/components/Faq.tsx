@@ -88,6 +88,29 @@ const faqData = [
         answer: (
             <p>Yes! Since the water reflects sunlight, we highly recommend bringing <strong>Sunglasses</strong> for a comfortable view of the Alleppey backwaters.</p>
         )
+    },
+    {
+        question: "Where does the speed boat depart from in Alleppey?",
+        plainAnswer: "Our speed boat in Alleppey departs from the Finishing Point (also known as the Alleppey Boat Jetty), which is the main backwater hub in Alappuzha town. It is easy to find and well-connected by auto-rickshaw, taxi, and public transport. Once you book, we share the exact Google Maps pin.",
+        answer: (
+            <div className="space-y-3">
+                <p>We depart from the <strong>Finishing Point (Alleppey Boat Jetty)</strong> — the main backwater hub in Alappuzha town.</p>
+                <ul className="space-y-2 text-gray-600">
+                    <li className="flex items-start gap-2">
+                        <span className="text-emerald-500 mt-0.5">📍</span>
+                        <span><strong>Location:</strong> Finishing Point, Alappuzha, Kerala 688012</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                        <span className="text-emerald-500 mt-0.5">🛺</span>
+                        <span>Easily reachable by auto-rickshaw, taxi, or public transport from any hotel in Alleppey.</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                        <span className="text-emerald-500 mt-0.5">📌</span>
+                        <span>Once you book, we share the <strong>exact Google Maps pin</strong> on WhatsApp.</span>
+                    </li>
+                </ul>
+            </div>
+        )
     }
 ];
 

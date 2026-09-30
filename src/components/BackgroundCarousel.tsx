@@ -10,6 +10,8 @@ type BackgroundCarouselProps = {
   intervalMs?: number;
   overlay?: boolean;
   overlayOpacity?: number;
+  /** LCP poster image shown instantly before video loads — critical for Core Web Vitals */
+  posterSrc?: string;
 };
 
 export default function BackgroundCarousel({
@@ -17,10 +19,12 @@ export default function BackgroundCarousel({
   videos,
   intervalMs = 10000,
   overlay = true,
-  overlayOpacity = 0.3
+  overlayOpacity = 0.3,
+  posterSrc,
 }: BackgroundCarouselProps) {
   const [index, setIndex] = useState(0);
   const [isMuted, setIsMuted] = useState(true);
+  const [videoReady, setVideoReady] = useState(false);
 
   // Determine which mode we are in
   const mode = videos && videos.length > 0 ? "video" : images && images.length > 0 ? "image" : "none";
@@ -36,10 +40,35 @@ export default function BackgroundCarousel({
     return () => clearInterval(id);
   }, [itemsLength, intervalMs]);
 
+  // Mark video as ready after a short delay so poster fades out gracefully
+  useEffect(() => {
+    if (mode === "video") {
+      const t = setTimeout(() => setVideoReady(true), 2000);
+      return () => clearTimeout(t);
+    }
+  }, [mode]);
+
   if (mode === "none") return null;
 
   return (
     <div className="absolute inset-0 bg-black">
+
+      {/* LCP Poster Image — renders instantly, fades as iframe loads */}
+      {posterSrc && mode === "video" && (
+        <div
+          className={`absolute inset-0 z-[5] transition-opacity duration-1000 ${videoReady ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+        >
+          <Image
+            src={posterSrc}
+            alt="Speed boat in Alleppey backwaters — Kerala private cruise"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+      )}
+
       {/* Video Mode */}
       {mode === "video" && videos && (
         <>
@@ -107,6 +136,7 @@ export default function BackgroundCarousel({
                 alt={`Hero background ${i + 1}`}
                 fill
                 priority={i === 0}
+                sizes="100vw"
                 className="object-cover"
               />
             </div>

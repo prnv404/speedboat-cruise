@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.speedboatcruisealleppey.com/sitemap.xml

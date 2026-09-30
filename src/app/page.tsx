@@ -46,7 +46,7 @@ export default function Home() {
       <section className="relative min-h-[95vh] sm:min-h-screen flex items-center justify-center overflow-hidden">
         <Navbar />
         <div className="absolute inset-0 z-0">
-          <BackgroundCarousel videos={videoData} />
+          <BackgroundCarousel videos={videoData} posterSrc="/hero-poster.jpg" />
           <div className="absolute inset-0 hero-gradient pointer-events-none" />
         </div>
 
@@ -66,12 +66,12 @@ export default function Home() {
               <span className="w-1 h-1 rounded-full bg-white/40" />
               <span className="flex items-center gap-1 text-emerald-300 text-xs font-semibold">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Open Now
+                Open Now · Closes 6:30 PM
               </span>
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight tracking-tight animate-slide-up px-4" style={{ animationDelay: '0.2s' }}>
-              #1 Speed Boat in <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Alleppey</span>
+              #1 Speed Boat in <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-200">Alleppey</span>, Kerala
               <br className="hidden sm:block" />
               Private Backwater Cruise
             </h1>
@@ -203,7 +203,7 @@ export default function Home() {
                 features: ["Alleppey Terminals", "Boat Race Track", "Village Canals", "Kayinakary Photo Point", "Vembanad Lake Views"],
                 distance: "30 km coverage",
                 color: "from-emerald-400 to-teal-500",
-                waMsg: "Hi! I'd like to book the 1-Hour Village Discovery speed boat tour in Alleppey. Can you share availability?"
+                waMsg: "Hi! I'd like to book the 1-Hour Village Discovery speed boat tour in Alleppey. Can you share availability and pricing?"
               },
               {
                 title: "Lake Explorer",
@@ -214,7 +214,7 @@ export default function Home() {
                 features: ["Alleppey Terminals", "Boat Race Track", "Village Canal Glimpses", "Vembanad Lake Entry"],
                 distance: "15 km coverage",
                 color: "from-blue-400 to-indigo-500",
-                waMsg: "Hi! I'd like to book the 30-Minute Lake Explorer speed boat tour in Alleppey. Can you share availability?"
+                waMsg: "Hi! I'd like to book the 30-Minute Lake Explorer speed boat tour in Alleppey. Can you share availability and pricing?"
               },
               {
                 title: "Quick Thrill",
@@ -225,7 +225,7 @@ export default function Home() {
                 features: ["Punnamada Lake", "Speed Experience", "Photo Opportunities"],
                 distance: "7 km fun ride",
                 color: "from-orange-400 to-amber-500",
-                waMsg: "Hi! I'd like to book the 10-Minute Quick Thrill speed boat ride in Alleppey. Can you share availability?"
+                waMsg: "Hi! I'd like to book the 10-Minute Quick Thrill speed boat ride in Alleppey. Can you share availability and pricing?"
               },
             ].map((pkg, i) => (
               <div key={i} className={`group relative ${pkg.highlight ? 'md:-mt-4 md:mb-0' : ''}`}>
@@ -246,9 +246,11 @@ export default function Home() {
 
                     <div className="mb-4 sm:mb-6">
                       <p className="text-gray-500 uppercase tracking-widest text-[10px] sm:text-xs font-bold mb-1 sm:mb-2">{pkg.time}</p>
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">{pkg.title}</h3>
-                      <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-transparent rounded-full mb-3" />
-                      <p className="text-xs text-emerald-600 font-semibold">{pkg.urgency}</p>
+                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-1">{pkg.title}</h3>
+                      <div className="h-1 w-12 bg-gradient-to-r from-emerald-500 to-transparent rounded-full mb-2" />
+                      <p className="text-xs text-emerald-600 font-semibold mb-2">{pkg.urgency}</p>
+                      {/* Price — WhatsApp for exact quote */}
+                      <p className="text-[11px] text-gray-400 italic">WhatsApp us for pricing →</p>
                     </div>
 
                     <div className="flex-grow space-y-3 sm:space-y-4 mb-6 sm:mb-8">
@@ -362,18 +364,18 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
                 <div className="space-y-3 sm:space-y-4 translate-y-6 sm:translate-y-8">
                   <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
-                    <Image src={fourCardImages[0] || '/placeholder'} alt="Speed boat in Alleppey backwaters" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[0] || '/placeholder'} alt="Speed boat in Alleppey backwaters" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
-                    <Image src={fourCardImages[1] || '/placeholder'} alt="Private speedboat on Vembanad Lake, Alleppey" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[1] || '/placeholder'} alt="Private speedboat on Vembanad Lake, Alleppey" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                 </div>
                 <div className="space-y-3 sm:space-y-4">
                   <div className="aspect-[4/3] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
-                    <Image src={fourCardImages[2] || '/placeholder'} alt="Alleppey village canal speed boat cruise" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[2] || '/placeholder'} alt="Alleppey village canal speed boat cruise" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                   <div className="aspect-[3/4] rounded-xl sm:rounded-2xl bg-gray-200 overflow-hidden relative">
-                    <Image src={fourCardImages[3] || '/placeholder'} alt="Kerala backwater speed boat tour, Alappuzha" fill className="object-cover hover:scale-110 transition-transform duration-700" />
+                    <Image src={fourCardImages[3] || '/placeholder'} alt="Kerala backwater speed boat tour, Alappuzha" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover hover:scale-110 transition-transform duration-700" />
                   </div>
                 </div>
               </div>
@@ -411,9 +413,10 @@ export default function Home() {
               >
                 <Image
                   src={src}
-                  alt={`Speed boat in Alleppey backwaters — photo ${index + 1}`}
+                  alt={`Speed boat in Alleppey backwaters — Kerala private backwater cruise photo ${index + 1}`}
                   fill
                   loading={index < 2 ? 'eager' : 'lazy'}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
               </div>
@@ -506,14 +509,21 @@ export default function Home() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="glass-card p-5 sm:p-6 rounded-2xl flex flex-col gap-4 hover:border-emerald-400/50 transition-all duration-300 hover:-translate-y-1 group cursor-pointer"
+                itemScope
+                itemType="https://schema.org/Review"
               >
+                <meta itemProp="itemReviewed" content="Speed Boat Cruise Alleppey" />
+                <div itemProp="reviewRating" itemScope itemType="https://schema.org/Rating">
+                  <meta itemProp="ratingValue" content="5" />
+                  <meta itemProp="bestRating" content="5" />
+                </div>
                 {/* Reviewer header */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3" itemProp="author" itemScope itemType="https://schema.org/Person">
                   <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${r.color} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
                     {r.initials}
                   </div>
                   <div className="min-w-0">
-                    <p className="font-bold text-gray-900 text-sm truncate">{r.name}</p>
+                    <p className="font-bold text-gray-900 text-sm truncate" itemProp="name">{r.name}</p>
                     <p className="text-xs text-gray-400">{r.date}</p>
                   </div>
                   {/* Google G mini */}
@@ -535,7 +545,7 @@ export default function Home() {
                 </div>
 
                 {/* Review text */}
-                <p className="text-gray-600 text-sm leading-relaxed line-clamp-4">"{r.review}"</p>
+                <p className="text-gray-600 text-sm leading-relaxed line-clamp-4" itemProp="reviewBody">"{r.review}"</p>
               </a>
             ))}
           </div>
@@ -692,7 +702,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center gap-2 sm:gap-3">
                   <span className="text-emerald-500 text-sm sm:text-base">📞</span>
-                  <a href="tel:+917012761588" className="text-sm sm:text-base hover:text-gray-900 transition-colors">+91 917012761588</a>
+                  <a href="tel:+917012761588" className="text-sm sm:text-base hover:text-gray-900 transition-colors">+91 70127 61588</a>
                 </li>
                 <li className="flex items-center gap-2 sm:gap-3">
                   <span className="text-emerald-500 text-sm sm:text-base">✉️</span>

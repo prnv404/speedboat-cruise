@@ -25,10 +25,13 @@ export default function StickyBookingBar() {
         className="bg-white border-t border-gray-200 shadow-[0_-8px_32px_rgba(0,0,0,0.12)] px-4 flex gap-3 items-center"
         style={{ paddingTop: '10px', paddingBottom: 'calc(28px + env(safe-area-inset-bottom))' }}
       >
-        {/* Urgency text */}
+        {/* Urgency text + social proof */}
         <div className="flex-1 min-w-0">
           <p className="text-[12px] font-bold text-gray-900 leading-tight">Book a Speed Boat Today!</p>
-          <p className="text-[11px] text-emerald-600 font-medium">Limited slots · Free cancellation</p>
+          <p className="text-[11px] text-emerald-600 font-medium flex items-center gap-1">
+            <span className="text-yellow-400">⭐</span>
+            5.0 · 221+ reviews · Free cancellation
+          </p>
         </div>
 
         {/* Call CTA */}
