@@ -1,14 +1,20 @@
-﻿'use client';
+'use client';
 
 import { useState, useRef, useEffect } from 'react';
 
 // ─── Package Data ────────────────────────────────────────────────────────────
+// Pricing model:
+//   village-discovery: ₹5,000 base for ≤3 guests, +₹500/person above 3
+//   lake-explorer:     ₹3,000 base for ≤3 guests, +₹400/person above 3
+//   quick-thrill:      ₹400/person, minimum ₹1,300 (covers 1–3 guests)
 const PACKAGES = [
   {
     id: 'village-discovery',
     title: 'Village Discovery',
     duration: '1 Hour',
-    pricePerPerson: 2499,
+    basePrice: 5000,       // flat for 1–3 guests
+    baseGuests: 3,         // guests included in base
+    extraPerPerson: 500,   // per person above baseGuests
     badge: 'Most Popular',
     emoji: '🛥️',
     activeBg: 'bg-gradient-to-br from-emerald-500 to-teal-600',
@@ -18,7 +24,9 @@ const PACKAGES = [
     id: 'lake-explorer',
     title: 'Lake Explorer',
     duration: '30 Min',
-    pricePerPerson: 1499,
+    basePrice: 3000,
+    baseGuests: 3,
+    extraPerPerson: 400,
     badge: 'Popular',
     emoji: '🌊',
     activeBg: 'bg-gradient-to-br from-blue-500 to-indigo-600',
@@ -28,13 +36,26 @@ const PACKAGES = [
     id: 'quick-thrill',
     title: 'Quick Thrill',
     duration: '10 Min',
-    pricePerPerson: 799,
+    basePrice: 1300,       // minimum charge (covers 1–3 guests)
+    baseGuests: 3,
+    extraPerPerson: 400,   // 4+ guests: 400 × total guests
     badge: 'Express',
     emoji: '⚡',
     activeBg: 'bg-gradient-to-br from-orange-400 to-amber-500',
     activeShadow: 'shadow-orange-400/25',
   },
 ];
+
+// ─── Price Calculator ─────────────────────────────────────────────────────────
+function calcTotal(pkg: typeof PACKAGES[number], guests: number): number {
+  if (pkg.id === 'quick-thrill') {
+    // Pure per-person with a floor
+    return Math.max(pkg.basePrice, pkg.extraPerPerson * guests);
+  }
+  // Tiered: flat base for ≤ baseGuests, then +extraPerPerson for each above
+  const extra = Math.max(0, guests - pkg.baseGuests);
+  return pkg.basePrice + extra * pkg.extraPerPerson;
+}
 
 const MAX_GUESTS = 7;
 const MIN_GUESTS = 1;
@@ -107,12 +128,14 @@ function CalendarPopup({
 
   return (
     <>
+      {/* Backdrop */}
       <div
-        className="fixed inset-0 z-40 bg-black/10 backdrop-blur-[2px]"
+        className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]"
         onClick={onClose}
         aria-hidden="true"
       />
-      <div className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:absolute md:top-[calc(100%+8px)] md:left-0 md:translate-x-0 md:translate-y-0 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_24px_48px_-12px_rgba(0,0,0,0.18)] border border-white/60 p-5 w-[19rem]">
+      {/* Calendar panel — centred on mobile, anchored on desktop */}
+      <div className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:absolute md:top-[calc(100%+8px)] md:left-0 md:translate-x-0 md:translate-y-0 bg-white/98 backdrop-blur-xl rounded-2xl shadow-[0_24px_48px_-12px_rgba(0,0,0,0.22)] border border-white/60 p-4 sm:p-5 w-[calc(100vw-2rem)] max-w-[19rem]">
         <div className="flex items-center justify-between mb-4">
           <button onClick={prevMonth} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-emerald-50 active:bg-emerald-100 transition-colors text-emerald-600 text-2xl leading-none" aria-label="Previous month">&#8249;</button>
           <span className="text-sm font-bold text-gray-800">{MONTH_NAMES[viewMonth]} {viewYear}</span>
@@ -174,7 +197,7 @@ export default function BookingWidget() {
   const dateRef = useRef<HTMLDivElement>(null);
 
   const pkg = PACKAGES.find(p => p.id === selectedPkgId)!;
-  const total = pkg.pricePerPerson * guests;
+  const total = calcTotal(pkg, guests);
 
   function formatDate(d: Date | null) {
     if (!d) return null;
@@ -189,7 +212,7 @@ export default function BookingWidget() {
       `Date: ${dateStr}\n` +
       `Preferred Time: ${timeStr}\n` +
       `Guests: ${guests}\n` +
-      `Estimated Total: ${formatINR(total)}\n\n` +
+      `Total: ${formatINR(total)}\n\n` +
       `Could you please confirm availability and proceed with the booking?`
     );
   }
@@ -207,30 +230,33 @@ export default function BookingWidget() {
   }, [calOpen]);
 
   return (
-    <div className="mt-12 sm:mt-16 mx-auto max-w-2xl w-full">
+    <div className="mt-10 sm:mt-16 mx-auto max-w-2xl w-full px-0">
       <div className="relative bg-white/70 backdrop-blur-2xl rounded-3xl border border-white/80 shadow-[0_20px_48px_-16px_rgba(16,185,129,0.18)] overflow-visible">
 
+        {/* Top accent line */}
         <div className="absolute -top-[1px] -left-[1px] -right-[1px] h-1.5 bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-400 rounded-t-3xl" />
 
-        <div className="p-5 sm:p-7 pt-6 sm:pt-8 flex flex-col gap-6">
+        <div className="p-4 sm:p-7 pt-6 sm:pt-8 flex flex-col gap-5 sm:gap-6">
 
+          {/* Header */}
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[10px] text-emerald-600 uppercase tracking-widest font-bold mb-0.5">Instant Booking</p>
               <h3 className="text-base sm:text-lg font-bold text-gray-900">Reserve Your Speed Boat</h3>
             </div>
-            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50/90 border border-emerald-100 px-3 py-1.5 rounded-full">
+            <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-700 bg-emerald-50/90 border border-emerald-100 px-2.5 py-1.5 rounded-full shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
               Open Now
             </div>
           </div>
 
+          {/* Two-column on md+, single-column on mobile */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
 
             {/* Left: Cruise Selector */}
             <div className="flex flex-col gap-2">
               <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider pl-1">Select Cruise</label>
-              <div className="flex flex-col gap-2 h-full">
+              <div className="flex flex-col gap-2">
                 {PACKAGES.map(p => {
                   const isActive = p.id === selectedPkgId;
                   return (
@@ -238,7 +264,9 @@ export default function BookingWidget() {
                       key={p.id}
                       onClick={() => setSelectedPkgId(p.id)}
                       className={[
-                        'flex items-center gap-3 w-full rounded-2xl border px-4 py-3.5 transition-all duration-300 text-left flex-1',
+                        'flex items-center gap-3 w-full rounded-2xl border px-4 py-3.5 transition-all duration-300 text-left',
+                        // Ensure a comfortable touch target on mobile
+                        'min-h-[60px] sm:min-h-[unset]',
                         isActive
                           ? `${p.activeBg} border-transparent text-white shadow-xl ${p.activeShadow} scale-[1.01]`
                           : 'border-white/80 bg-white/50 text-gray-700 hover:bg-white/80 hover:border-emerald-100 hover:shadow-sm',
@@ -257,9 +285,11 @@ export default function BookingWidget() {
                       </div>
                       <div className="text-right flex-shrink-0">
                         <span className={`text-sm font-bold tabular-nums block ${isActive ? 'text-white' : 'text-gray-800'}`}>
-                          {formatINR(p.pricePerPerson)}
+                          {formatINR(p.basePrice)}
                         </span>
-                        <span className={`text-[10px] ${isActive ? 'text-white/70' : 'text-gray-400'}`}>/person</span>
+                        <span className={`text-[10px] ${isActive ? 'text-white/70' : 'text-gray-400'}`}>
+                          {p.id === 'quick-thrill' ? 'from' : 'base ≤3'}
+                        </span>
                       </div>
                     </button>
                   );
@@ -353,15 +383,15 @@ export default function BookingWidget() {
                   </div>
                 </button>
 
-                {/* Collapsible chip grid */}
+                {/* Collapsible chip grid — 3 cols on mobile, 4 on sm+ */}
                 <div
                   className={[
                     'overflow-hidden transition-all duration-300 ease-in-out',
-                    timeOpen ? 'max-h-[220px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none',
+                    timeOpen ? 'max-h-[240px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none',
                   ].join(' ')}
                 >
                   <div className="bg-white/80 backdrop-blur-sm border border-white/80 rounded-2xl p-3 mt-1">
-                    <div className="grid grid-cols-4 gap-1.5 max-h-[168px] overflow-y-auto pr-0.5">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 max-h-[180px] overflow-y-auto pr-0.5 overscroll-contain">
                       {TIME_SLOTS.map(slot => {
                         const isSelected = selectedTime === slot;
                         return (
@@ -369,7 +399,7 @@ export default function BookingWidget() {
                             key={slot}
                             onClick={() => { setSelectedTime(isSelected ? null : slot); setTimeOpen(false); }}
                             className={[
-                              'rounded-xl px-2 py-2 text-[11px] font-semibold transition-all duration-150 text-center leading-tight',
+                              'rounded-xl px-2 py-2.5 text-[11px] font-semibold transition-all duration-150 text-center leading-tight min-h-[38px]',
                               isSelected
                                 ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/30 scale-[1.04]'
                                 : 'bg-white/70 border border-gray-100 text-gray-600 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700 active:scale-95',
@@ -398,18 +428,19 @@ export default function BookingWidget() {
                     </div>
                     <span className="text-sm font-semibold text-gray-900">{guests} {guests === 1 ? 'Guest' : 'Guests'}</span>
                   </div>
+                  {/* Larger counter buttons on mobile for easier tapping */}
                   <div className="flex items-center gap-1 bg-gray-100/70 rounded-xl p-1">
                     <button
                       onClick={() => setGuests(g => Math.max(MIN_GUESTS, g - 1))}
                       disabled={guests <= MIN_GUESTS}
-                      className="w-8 h-8 flex items-center justify-center rounded-lg bg-white text-gray-700 font-bold text-lg shadow-sm hover:bg-gray-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      className="w-9 h-9 flex items-center justify-center rounded-lg bg-white text-gray-700 font-bold text-lg shadow-sm hover:bg-gray-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                       aria-label="Decrease guests"
                     >-</button>
-                    <span className="w-6 text-center text-sm font-bold text-gray-900 tabular-nums select-none">{guests}</span>
+                    <span className="w-7 text-center text-sm font-bold text-gray-900 tabular-nums select-none">{guests}</span>
                     <button
                       onClick={() => setGuests(g => Math.min(MAX_GUESTS, g + 1))}
                       disabled={guests >= MAX_GUESTS}
-                      className="w-8 h-8 flex items-center justify-center rounded-lg bg-white text-gray-700 font-bold text-lg shadow-sm hover:bg-gray-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                      className="w-9 h-9 flex items-center justify-center rounded-lg bg-white text-gray-700 font-bold text-lg shadow-sm hover:bg-gray-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                       aria-label="Increase guests"
                     >+</button>
                   </div>
@@ -421,7 +452,16 @@ export default function BookingWidget() {
               <div className="flex items-center justify-between bg-gradient-to-r from-emerald-50/80 to-teal-50/50 border border-emerald-100/60 rounded-2xl px-4 py-3">
                 <div>
                   <span className="text-[10px] text-emerald-700 font-semibold uppercase tracking-wider block mb-0.5">Total</span>
-                  <span className="text-[11px] text-gray-500">{formatINR(pkg.pricePerPerson)} x {guests} {guests === 1 ? 'person' : 'people'}</span>
+                  <span className="text-[11px] text-gray-500">
+                    {pkg.id === 'quick-thrill'
+                      ? guests <= pkg.baseGuests
+                        ? `Min. charge for ≤${pkg.baseGuests}`
+                        : `${formatINR(pkg.extraPerPerson)} × ${guests} people`
+                      : guests <= pkg.baseGuests
+                        ? `Base — up to ${pkg.baseGuests} guests`
+                        : `${formatINR(pkg.basePrice)} + ${guests - pkg.baseGuests} × ${formatINR(pkg.extraPerPerson)}`
+                    }
+                  </span>
                 </div>
                 <span className="text-2xl font-black text-gray-900 tabular-nums tracking-tight">{formatINR(total)}</span>
               </div>
@@ -431,7 +471,7 @@ export default function BookingWidget() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2.5 w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl py-4 font-bold text-sm transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(16,185,129,0.55)] hover:scale-[1.02] active:scale-[0.98] min-h-[54px] group"
+                className="flex items-center justify-center gap-2.5 w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl py-4 font-bold text-sm transition-all duration-300 hover:shadow-[0_10px_30px_-10px_rgba(16,185,129,0.55)] hover:scale-[1.02] active:scale-[0.98] min-h-[56px] group"
                 aria-label="Book via WhatsApp"
               >
                 <svg className="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
@@ -443,19 +483,19 @@ export default function BookingWidget() {
             </div>
           </div>
 
-          {/* Trust bar */}
-          <div className="flex items-center justify-center gap-6 pt-2 border-t border-gray-100/60">
-            <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium">
+          {/* Trust bar — wraps gracefully on mobile */}
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 pt-2 border-t border-gray-100/60">
+            <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium whitespace-nowrap">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-              Licensed and Insured
+              Licensed & Insured
             </span>
-            <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium">
+            <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium whitespace-nowrap">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
               Life Jackets
             </span>
-            <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium">
+            <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium whitespace-nowrap">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
-              5.0 star 221+ Reviews
+              5.0 · 221+ Reviews
             </span>
           </div>
 
