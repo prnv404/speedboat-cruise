@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import BackgroundCarousel from "@/components/BackgroundCarousel";
 import Faq from "@/components/Faq";
 import StickyBookingBar from "@/components/StickyBookingBar";
+import BookingWidget from "@/components/BookingWidget";
 import { videoData } from "@/components/video";
 import fs from "fs";
 import path from "path";
@@ -295,6 +296,9 @@ export default function Home() {
               </div>
             ))}
           </div>
+
+          {/* Booking Widget */}
+          <BookingWidget />
         </div>
       </section>
 
@@ -660,51 +664,14 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Blog Section */}
-      <section className="py-16 sm:py-24 bg-white border-t border-gray-100">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 sm:mb-12 gap-4">
-            <div>
-              <span className="text-emerald-600 text-xs sm:text-sm tracking-wider uppercase font-bold mb-2 block">
-                Local Knowledge
-              </span>
-              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Latest Travel Guides</h2>
-            </div>
-            <Link href="/blog" className="text-emerald-600 font-bold hover:text-emerald-700 text-sm transition-colors">
-              View All Articles →
-            </Link>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Link href="/blog/things-to-do-in-alleppey" className="group flex flex-col bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:border-emerald-300 transition-colors">
-              <div className="relative h-48 overflow-hidden">
-                <Image src="/og-image.jpg" alt="Things to do in Alleppey" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-emerald-700">10 Best Things to Do in Alleppey</h3>
-                <p className="text-sm text-gray-600 line-clamp-2">The definitive local guide to the best experiences in Alleppey, Kerala.</p>
-              </div>
-            </Link>
-            <Link href="/blog/speed-boat-vs-houseboat-alleppey" className="group flex flex-col bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:border-emerald-300 transition-colors">
-              <div className="relative h-48 overflow-hidden">
-                <Image src="/og-image.jpg" alt="Speed boat vs houseboat" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-emerald-700">Speed Boat vs Houseboat</h3>
-                <p className="text-sm text-gray-600 line-clamp-2">An honest comparison to help you choose the best backwater experience.</p>
-              </div>
-            </Link>
-            <Link href="/blog/alleppey-backwater-tour-guide" className="group flex flex-col bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:border-emerald-300 transition-colors">
-              <div className="relative h-48 overflow-hidden">
-                <Image src="/og-image.jpg" alt="Alleppey tour guide" fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover group-hover:scale-105 transition-transform duration-500" />
-              </div>
-              <div className="p-6">
-                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-emerald-700">Complete Tour Guide</h3>
-                <p className="text-sm text-gray-600 line-clamp-2">Prices, tips, and everything you need to know before booking.</p>
-              </div>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Blog internal links — visually hidden, crawlable by search engines for SEO */}
+      <nav aria-hidden="true" className="sr-only">
+        <Link href="/blog">Travel Guides — Speed Boat Cruise Alleppey</Link>
+        <Link href="/blog/things-to-do-in-alleppey">10 Best Things to Do in Alleppey</Link>
+        <Link href="/blog/speed-boat-vs-houseboat-alleppey">Speed Boat vs Houseboat in Alleppey</Link>
+        <Link href="/blog/alleppey-backwater-tour-guide">Complete Alleppey Backwater Tour Guide</Link>
+        <Link href="/blog/best-time-to-visit-alleppey-backwaters">Best Time to Visit Alleppey Backwaters</Link>
+      </nav>
 
       <Faq />
       <StickyBookingBar />
@@ -742,7 +709,7 @@ export default function Home() {
             <div>
               <h4 className="text-base sm:text-lg font-bold text-gray-900 mb-4 sm:mb-6">Explore</h4>
               <ul className="space-y-3 sm:space-y-4">
-                {[{label: 'Packages', href: '/#packages'}, {label: 'About Us', href: '/about'}, {label: 'Gallery', href: '/gallery'}, {label: 'Blog', href: '/blog'}, {label: 'Contact', href: '/contact'}].map((item) => (
+                {[{ label: 'Packages', href: '/#packages' }, { label: 'About Us', href: '/about' }, { label: 'Gallery', href: '/gallery' }, { label: 'Blog', href: '/blog' }, { label: 'Contact', href: '/contact' }].map((item) => (
                   <li key={item.label}>
                     <Link href={item.href} className="text-sm sm:text-base text-gray-600 hover:text-emerald-600 transition-colors flex items-center gap-2 group">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 group-hover:bg-emerald-500 transition-colors" />
