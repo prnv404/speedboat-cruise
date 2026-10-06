@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useState, useRef, useEffect } from 'react';
 
@@ -38,6 +38,22 @@ const PACKAGES = [
 
 const MAX_GUESTS = 7;
 const MIN_GUESTS = 1;
+
+// ─── Time Slots (6:00 AM – 6:00 PM, every 30 min) ────────────────────────────
+function generateTimeSlots(): string[] {
+  const slots: string[] = [];
+  for (let h = 6; h <= 18; h++) {
+    for (const m of [0, 30]) {
+      if (h === 18 && m === 30) break;
+      const period = h < 12 ? 'AM' : 'PM';
+      const displayH = h === 0 ? 12 : h > 12 ? h - 12 : h;
+      const displayM = m === 0 ? '00' : '30';
+      slots.push(`${displayH}:${displayM} ${period}`);
+    }
+  }
+  return slots;
+}
+const TIME_SLOTS = generateTimeSlots();
 
 function formatINR(amount: number) {
   return `₹${amount.toLocaleString('en-IN')}`;
@@ -91,27 +107,22 @@ function CalendarPopup({
 
   return (
     <>
-      {/* Backdrop — closes on tap (mobile) */}
       <div
         className="fixed inset-0 z-40 bg-black/10 backdrop-blur-[2px]"
         onClick={onClose}
         aria-hidden="true"
       />
-      {/* Calendar: centered on mobile, drops below button on desktop */}
       <div className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:absolute md:top-[calc(100%+8px)] md:left-0 md:translate-x-0 md:translate-y-0 bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_24px_48px_-12px_rgba(0,0,0,0.18)] border border-white/60 p-5 w-[19rem]">
-        {/* Month nav */}
         <div className="flex items-center justify-between mb-4">
           <button onClick={prevMonth} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-emerald-50 active:bg-emerald-100 transition-colors text-emerald-600 text-2xl leading-none" aria-label="Previous month">&#8249;</button>
           <span className="text-sm font-bold text-gray-800">{MONTH_NAMES[viewMonth]} {viewYear}</span>
           <button onClick={nextMonth} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-emerald-50 active:bg-emerald-100 transition-colors text-emerald-600 text-2xl leading-none" aria-label="Next month">&#8250;</button>
         </div>
-        {/* Day headers */}
         <div className="grid grid-cols-7 mb-1">
           {DAY_NAMES.map(d => (
             <div key={d} className="text-center text-[11px] font-bold text-gray-400 py-1">{d}</div>
           ))}
         </div>
-        {/* Day cells */}
         <div className="grid grid-cols-7 gap-y-0.5">
           {cells.map((day, idx) => {
             if (!day) return <div key={`e-${idx}`} />;
@@ -158,6 +169,8 @@ export default function BookingWidget() {
   const [guests, setGuests] = useState(2);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [calOpen, setCalOpen] = useState(false);
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [timeOpen, setTimeOpen] = useState(false);
   const dateRef = useRef<HTMLDivElement>(null);
 
   const pkg = PACKAGES.find(p => p.id === selectedPkgId)!;
@@ -170,9 +183,11 @@ export default function BookingWidget() {
 
   function buildWhatsAppMessage() {
     const dateStr = selectedDate ? (formatDate(selectedDate) ?? 'flexible') : 'flexible';
+    const timeStr = selectedTime ?? 'flexible';
     return encodeURIComponent(
       `Hi! I'd like to book the *${pkg.title} (${pkg.duration})* speed boat cruise in Alleppey.\n\n` +
       `Date: ${dateStr}\n` +
+      `Preferred Time: ${timeStr}\n` +
       `Guests: ${guests}\n` +
       `Estimated Total: ${formatINR(total)}\n\n` +
       `Could you please confirm availability and proceed with the booking?`
@@ -181,7 +196,6 @@ export default function BookingWidget() {
 
   const whatsappUrl = `https://wa.me/917012761588?text=${buildWhatsAppMessage()}`;
 
-  // Close calendar on outside click
   useEffect(() => {
     function handler(e: MouseEvent) {
       if (calOpen && dateRef.current && !dateRef.current.contains(e.target as Node)) {
@@ -196,12 +210,10 @@ export default function BookingWidget() {
     <div className="mt-12 sm:mt-16 mx-auto max-w-2xl w-full">
       <div className="relative bg-white/70 backdrop-blur-2xl rounded-3xl border border-white/80 shadow-[0_20px_48px_-16px_rgba(16,185,129,0.18)] overflow-visible">
 
-        {/* Top gradient accent */}
         <div className="absolute -top-[1px] -left-[1px] -right-[1px] h-1.5 bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-400 rounded-t-3xl" />
 
         <div className="p-5 sm:p-7 pt-6 sm:pt-8 flex flex-col gap-6">
 
-          {/* Header */}
           <div className="flex items-center justify-between">
             <div>
               <p className="text-[10px] text-emerald-600 uppercase tracking-widest font-bold mb-0.5">Instant Booking</p>
@@ -213,10 +225,9 @@ export default function BookingWidget() {
             </div>
           </div>
 
-          {/* ── 2-Column grid on md+, single column on mobile ── */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
 
-            {/* ── Left: Cruise Selector ── */}
+            {/* Left: Cruise Selector */}
             <div className="flex flex-col gap-2">
               <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider pl-1">Select Cruise</label>
               <div className="flex flex-col gap-2 h-full">
@@ -256,7 +267,7 @@ export default function BookingWidget() {
               </div>
             </div>
 
-            {/* ── Right: Date + Guests + Price + CTA ── */}
+            {/* Right: Date + Time + Guests + Price + CTA */}
             <div className="flex flex-col gap-4">
 
               {/* Date Picker */}
@@ -296,6 +307,85 @@ export default function BookingWidget() {
                 )}
               </div>
 
+              {/* Preferred Time Picker */}
+              <div className="flex flex-col gap-2">
+                <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider pl-1">Preferred Time</label>
+
+                <button
+                  onClick={() => setTimeOpen(o => !o)}
+                  className={[
+                    'w-full flex items-center justify-between bg-white/70 backdrop-blur-sm border rounded-2xl px-4 py-3.5 transition-all min-h-[54px]',
+                    timeOpen
+                      ? 'border-emerald-400 bg-white ring-4 ring-emerald-500/10'
+                      : 'border-white/80 hover:border-emerald-200 hover:bg-white/90',
+                  ].join(' ')}
+                  aria-expanded={timeOpen}
+                  aria-label="Open time picker"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-colors ${selectedTime || timeOpen ? 'bg-emerald-100 text-emerald-600' : 'bg-gray-100 text-gray-400'}`}>
+                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <span className={`text-sm font-semibold ${selectedTime ? 'text-gray-900' : 'text-gray-400'}`}>
+                      {selectedTime ?? 'Any time'}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    {selectedTime && (
+                      <span
+                        role="button"
+                        tabIndex={0}
+                        onClick={(e) => { e.stopPropagation(); setSelectedTime(null); }}
+                        onKeyDown={(e) => { if (e.key === 'Enter') { e.stopPropagation(); setSelectedTime(null); } }}
+                        className="w-5 h-5 rounded-full bg-gray-200 hover:bg-red-100 hover:text-red-500 flex items-center justify-center transition-colors text-gray-400 cursor-pointer"
+                        aria-label="Clear selected time"
+                      >
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </span>
+                    )}
+                    <svg className={`w-4 h-4 flex-shrink-0 transition-transform ${timeOpen ? 'rotate-180 text-emerald-500' : 'text-gray-300'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </button>
+
+                {/* Collapsible chip grid */}
+                <div
+                  className={[
+                    'overflow-hidden transition-all duration-300 ease-in-out',
+                    timeOpen ? 'max-h-[220px] opacity-100' : 'max-h-0 opacity-0 pointer-events-none',
+                  ].join(' ')}
+                >
+                  <div className="bg-white/80 backdrop-blur-sm border border-white/80 rounded-2xl p-3 mt-1">
+                    <div className="grid grid-cols-4 gap-1.5 max-h-[168px] overflow-y-auto pr-0.5">
+                      {TIME_SLOTS.map(slot => {
+                        const isSelected = selectedTime === slot;
+                        return (
+                          <button
+                            key={slot}
+                            onClick={() => { setSelectedTime(isSelected ? null : slot); setTimeOpen(false); }}
+                            className={[
+                              'rounded-xl px-2 py-2 text-[11px] font-semibold transition-all duration-150 text-center leading-tight',
+                              isSelected
+                                ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/30 scale-[1.04]'
+                                : 'bg-white/70 border border-gray-100 text-gray-600 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700 active:scale-95',
+                            ].join(' ')}
+                            aria-pressed={isSelected}
+                          >
+                            {slot}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <p className="text-[10px] text-gray-400 mt-2 pl-0.5">Preferred start time · subject to availability</p>
+                  </div>
+                </div>
+              </div>
+
               {/* Guest Counter */}
               <div className="flex flex-col gap-2">
                 <label className="text-[10px] font-bold text-gray-400 uppercase tracking-wider pl-1">Guests</label>
@@ -314,7 +404,7 @@ export default function BookingWidget() {
                       disabled={guests <= MIN_GUESTS}
                       className="w-8 h-8 flex items-center justify-center rounded-lg bg-white text-gray-700 font-bold text-lg shadow-sm hover:bg-gray-50 active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
                       aria-label="Decrease guests"
-                    >−</button>
+                    >-</button>
                     <span className="w-6 text-center text-sm font-bold text-gray-900 tabular-nums select-none">{guests}</span>
                     <button
                       onClick={() => setGuests(g => Math.min(MAX_GUESTS, g + 1))}
@@ -331,7 +421,7 @@ export default function BookingWidget() {
               <div className="flex items-center justify-between bg-gradient-to-r from-emerald-50/80 to-teal-50/50 border border-emerald-100/60 rounded-2xl px-4 py-3">
                 <div>
                   <span className="text-[10px] text-emerald-700 font-semibold uppercase tracking-wider block mb-0.5">Total</span>
-                  <span className="text-[11px] text-gray-500">{formatINR(pkg.pricePerPerson)} × {guests} {guests === 1 ? 'person' : 'people'}</span>
+                  <span className="text-[11px] text-gray-500">{formatINR(pkg.pricePerPerson)} x {guests} {guests === 1 ? 'person' : 'people'}</span>
                 </div>
                 <span className="text-2xl font-black text-gray-900 tabular-nums tracking-tight">{formatINR(total)}</span>
               </div>
@@ -357,7 +447,7 @@ export default function BookingWidget() {
           <div className="flex items-center justify-center gap-6 pt-2 border-t border-gray-100/60">
             <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" /></svg>
-              Licensed & Insured
+              Licensed and Insured
             </span>
             <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
@@ -365,7 +455,7 @@ export default function BookingWidget() {
             </span>
             <span className="flex items-center gap-1.5 text-[10px] text-gray-500 font-medium">
               <svg className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>
-              5.0★ · 221+ Reviews
+              5.0 star 221+ Reviews
             </span>
           </div>
 
