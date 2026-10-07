@@ -14,26 +14,22 @@ export default function StickyBookingBar() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-40 md:hidden transition-transform duration-500 ease-out ${
-        visible ? 'translate-y-0' : 'translate-y-full'
+      className={`fixed z-50 md:hidden transition-transform duration-500 ease-out left-4 right-4 ${
+        visible ? 'translate-y-0' : 'translate-y-[150%]'
       }`}
+      style={{ bottom: 'calc(16px + env(safe-area-inset-bottom))' }}
     >
-      {/* Gradient fade above bar */}
-      <div className="h-8 bg-gradient-to-t from-white/90 to-transparent pointer-events-none" />
-
-      <div
-        className="bg-white border-t border-gray-200 shadow-[0_-8px_32px_rgba(0,0,0,0.12)] px-4 flex gap-3 items-center"
-        style={{ paddingTop: '10px', paddingBottom: 'calc(28px + env(safe-area-inset-bottom))' }}
-      >
-        {/* Urgency text + social proof */}
-        <div className="flex-1 min-w-0">
-          <p className="text-[12px] font-bold text-gray-900 leading-tight">Book a Speed Boat Today!</p>
+      <div className="bg-white/80 backdrop-blur-xl border border-white shadow-[0_8px_32px_rgba(0,0,0,0.12)] rounded-2xl p-2.5 flex items-center justify-between gap-3">
+        {/* Text */}
+        <div className="pl-2 flex-1 min-w-0">
+          <p className="text-[13px] font-bold text-gray-900 leading-tight">Speed Boat Cruise</p>
+          <p className="text-[11px] text-emerald-600 font-medium mt-0.5">Available Today</p>
         </div>
 
         {/* Book Now CTA */}
         <a
           href="#booking-widget"
-          className="flex items-center justify-center gap-1.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-white font-bold text-xs px-6 py-3 rounded-xl transition-colors duration-200 shrink-0 min-h-[44px]"
+          className="flex items-center justify-center bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-white font-bold text-[13px] px-5 py-2.5 rounded-xl transition-all duration-300 shrink-0 shadow-[0_4px_12px_rgba(16,185,129,0.25)] active:scale-95"
           aria-label="Book a speed boat in Alleppey"
         >
           Book Now
