@@ -19,6 +19,17 @@ export const metadata: Metadata = {
 
 export const posts = [
   {
+    slug: "alleppey-speed-boat-cost-price-guide-2026",
+    title: "Alleppey Speed Boat Cost & Price Guide 2026",
+    excerpt:
+      "Planning a speed boat cruise in Alleppey? Discover exact prices, packages, and tips on how to avoid hidden fees in our transparent 2026 cost guide.",
+    date: "October 2026",
+    readTime: "6 min read",
+    category: "Pricing Guide",
+    image: "/og-image.jpg",
+    imageAlt: "Speed boat on Alleppey backwaters — cost and price guide",
+  },
+  {
     slug: "things-to-do-in-alleppey",
     title: "10 Best Things to Do in Alleppey (Alappuzha) in 2026",
     excerpt:
