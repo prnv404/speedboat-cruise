@@ -27,7 +27,6 @@ export default function Navbar() {
     { label: 'Packages', href: '/#packages' },
     { label: 'About', href: '/about' },
     { label: 'Gallery', href: '/gallery' },
-    { label: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -129,7 +128,7 @@ export default function Navbar() {
                 <line x1="8" x2="8" y1="2" y2="6" />
                 <line x1="3" x2="21" y1="10" y2="10" />
               </svg>
-              <span className="relative z-10">Book Now</span>
+              <span className="relative z-10">Contact Now</span>
             </a>
           </div>
 
@@ -194,7 +193,7 @@ export default function Navbar() {
               <line x1="8" x2="8" y1="2" y2="6" />
               <line x1="3" x2="21" y1="10" y2="10" />
             </svg>
-            <span className="relative z-10">Book Now</span>
+            <span className="relative z-10">Contact Now</span>
           </a>
         </div>
       </div>
