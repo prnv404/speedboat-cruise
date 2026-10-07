@@ -130,16 +130,16 @@ function CalendarPopup({
     <>
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-40 bg-black/20 backdrop-blur-[2px]"
+        className="fixed inset-0 z-40 bg-black/10 sm:bg-transparent"
         onClick={onClose}
         aria-hidden="true"
       />
       {/* Calendar panel — centred on mobile, anchored on desktop */}
-      <div className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:absolute md:top-[calc(100%+8px)] md:left-0 md:translate-x-0 md:translate-y-0 bg-white/98 backdrop-blur-xl rounded-2xl shadow-[0_24px_48px_-12px_rgba(0,0,0,0.22)] border border-white/60 p-4 sm:p-5 w-[calc(100vw-2rem)] max-w-[19rem]">
+      <div className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 md:absolute md:top-[calc(100%+8px)] md:left-0 md:translate-x-0 md:translate-y-0 bg-white rounded-xl shadow-2xl border border-gray-100 p-4 sm:p-5 w-[calc(100vw-2rem)] max-w-[19rem] ring-1 ring-black/5">
         <div className="flex items-center justify-between mb-4">
-          <button onClick={prevMonth} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-emerald-50 active:bg-emerald-100 transition-colors text-emerald-600 text-2xl leading-none" aria-label="Previous month">&#8249;</button>
+          <button onClick={prevMonth} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 active:bg-gray-200 transition-colors text-gray-600 text-2xl leading-none" aria-label="Previous month">&#8249;</button>
           <span className="text-sm font-bold text-gray-800">{MONTH_NAMES[viewMonth]} {viewYear}</span>
-          <button onClick={nextMonth} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-emerald-50 active:bg-emerald-100 transition-colors text-emerald-600 text-2xl leading-none" aria-label="Next month">&#8250;</button>
+          <button onClick={nextMonth} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 active:bg-gray-200 transition-colors text-gray-600 text-2xl leading-none" aria-label="Next month">&#8250;</button>
         </div>
         <div className="grid grid-cols-7 mb-1">
           {DAY_NAMES.map(d => (
@@ -229,8 +229,20 @@ export default function BookingWidget() {
     return () => document.removeEventListener('mousedown', handler);
   }, [calOpen]);
 
+  // Listen for package pre-selection events dispatched by the package cards above
+  useEffect(() => {
+    function handleSelectPkg(e: Event) {
+      const pkgId = (e as CustomEvent<string>).detail;
+      if (PACKAGES.some(p => p.id === pkgId)) {
+        setSelectedPkgId(pkgId);
+      }
+    }
+    window.addEventListener('select-package', handleSelectPkg);
+    return () => window.removeEventListener('select-package', handleSelectPkg);
+  }, []);
+
   return (
-    <div className="mt-10 sm:mt-16 mx-auto max-w-2xl w-full px-0">
+    <div id="booking-widget" className="mt-10 sm:mt-16 mx-auto max-w-2xl w-full px-0">
       <div className="relative bg-white/70 backdrop-blur-2xl rounded-3xl border border-white/80 shadow-[0_20px_48px_-16px_rgba(16,185,129,0.18)] overflow-visible">
 
         {/* Top accent line */}
@@ -394,19 +406,31 @@ export default function BookingWidget() {
                     <div className="grid grid-cols-3 sm:grid-cols-4 gap-1.5 max-h-[180px] overflow-y-auto pr-0.5 overscroll-contain">
                       {TIME_SLOTS.map(slot => {
                         const isSelected = selectedTime === slot;
+                        
+                        let specialLabel = '';
+                        if (slot === '6:00 AM' || slot === '6:30 AM') specialLabel = '🌅 Sunrise';
+                        if (slot === '5:00 PM' || slot === '5:30 PM') specialLabel = '🌇 Sunset';
+
                         return (
                           <button
                             key={slot}
                             onClick={() => { setSelectedTime(isSelected ? null : slot); setTimeOpen(false); }}
                             className={[
-                              'rounded-xl px-2 py-2.5 text-[11px] font-semibold transition-all duration-150 text-center leading-tight min-h-[38px]',
+                              'rounded-xl px-1 py-1.5 flex flex-col items-center justify-center gap-0.5 transition-all duration-150 text-center leading-tight min-h-[44px]',
                               isSelected
                                 ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/30 scale-[1.04]'
-                                : 'bg-white/70 border border-gray-100 text-gray-600 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700 active:scale-95',
+                                : specialLabel
+                                  ? 'bg-amber-50 border border-amber-200 text-gray-800 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700 active:scale-95'
+                                  : 'bg-white/70 border border-gray-100 text-gray-600 hover:border-emerald-200 hover:bg-emerald-50 hover:text-emerald-700 active:scale-95',
                             ].join(' ')}
                             aria-pressed={isSelected}
                           >
-                            {slot}
+                            <span className="text-[11px] font-semibold">{slot}</span>
+                            {specialLabel && (
+                              <span className={`text-[8.5px] uppercase tracking-wider font-bold ${isSelected ? 'text-emerald-100' : 'text-amber-600'}`}>
+                                {specialLabel}
+                              </span>
+                            )}
                           </button>
                         );
                       })}

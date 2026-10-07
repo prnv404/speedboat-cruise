@@ -76,8 +76,7 @@ export default function ContactPage() {
             </a>
 
             {/* Phone */}
-            <a
-              href="tel:+917012761588"
+            <div
               className="group flex flex-col items-center text-center gap-4 p-8 rounded-2xl border border-gray-200 hover:border-emerald-400/60 hover:shadow-lg hover:shadow-emerald-500/10 transition-all duration-300 hover:-translate-y-1 bg-white"
             >
               <div className="w-16 h-16 rounded-full bg-emerald-500/10 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors">
@@ -85,12 +84,15 @@ export default function ContactPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
-              <div>
+              <div className="flex flex-col items-center">
                 <p className="text-xs text-gray-500 uppercase tracking-widest font-bold mb-1">Call Us</p>
-                <p className="text-xl font-bold text-gray-900">+91 70127 61588</p>
+                <div className="flex flex-col gap-1 my-1">
+                  <a href="tel:+917012761588" className="text-xl font-bold text-gray-900 hover:text-emerald-600 transition-colors">+91 70127 61588</a>
+                  <a href="tel:+919947753154" className="text-xl font-bold text-gray-900 hover:text-emerald-600 transition-colors">+91 99477 53154</a>
+                </div>
                 <p className="text-sm text-gray-500 font-medium mt-1">Open 6:00 AM – 6:30 PM</p>
               </div>
-            </a>
+            </div>
 
             {/* Location */}
             <div className="group flex flex-col items-center text-center gap-4 p-8 rounded-2xl border border-gray-200 bg-white">
@@ -110,18 +112,27 @@ export default function ContactPage() {
 
           {/* Map + Info */}
           <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-            {/* Google Map Embed */}
-            <div className="rounded-2xl overflow-hidden border border-gray-200 shadow-sm aspect-[4/3] w-full">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3937.1234567890!2d76.3388!3d9.4981!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b08712d5e0d9edd%3A0x1fc6c5c7f4a9d7b8!2sFinishing%20Point%20Boat%20Jetty%2C%20Alappuzha!5e0!3m2!1sen!2sin!4v1234567890"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Speed Boat Cruise Alleppey location — Finishing Point, Alappuzha"
-              />
+            {/* Google Map Link */}
+            <div className="rounded-2xl border border-gray-200 shadow-sm w-full bg-white flex flex-col items-center justify-center p-8 sm:p-12 h-full min-h-[300px]">
+              <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mb-6">
+                <svg className="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">Finishing Point, Alappuzha</h3>
+              <p className="text-sm text-gray-500 mb-8 text-center max-w-xs">Click below to view our exact departure location on Google Maps.</p>
+              <a
+                href="https://share.google/0dp8xJCrAQLo0HVdQ"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 bg-[#4285F4] hover:bg-[#3367D6] text-white font-bold rounded-xl px-6 py-3.5 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:-translate-y-1"
+              >
+                <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 01-1.447-.894L15 7m0 13V7" />
+                </svg>
+                View on Google Maps
+              </a>
             </div>
 
             {/* Info Panel */}
